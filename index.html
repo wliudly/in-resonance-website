@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <script>
 (function () {
-  var themes = { tide: 1, ink: 1, "ink-gold": 1 };
+  var themes = { tide: 1, ink: 1, "ink-gold": 1, purple: 1 };
   var theme = new URLSearchParams(location.search).get("theme");
   if (!themes[theme]) theme = "tide";
   document.documentElement.dataset.theme = theme;
@@ -35,6 +35,14 @@ html[data-theme="ink"], html[data-theme="ink-gold"]{
   --record:#F6F1E8; --record-muted:#D9CFC4; --record-line:#3A302C;
 }
 html[data-theme="ink-gold"]{ --art:#F0C84A; }
+html[data-theme="purple"]{
+  --tech-bg:#2E3A86; --tech-ink:#F6F3E8; --tech:#F0C84A; --tech-muted:#C9C6E6;
+  --art-bg:#7A305C; --art-ink:#FFF4EC; --art:#F0C84A; --art-muted:#F0D0DC;
+  --wall:#3A2468; --frame:#1A2048;
+  --paper:#2E1C52; --paper-ink:#F6F3E8; --paper-muted:#D4C8E2; --paper-line:#534078;
+  --record:#F6F3E8; --record-muted:#D4C8E0; --record-line:#534078;
+  --dev-bg:#3A2468;
+}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
 body{font-family:"Space Grotesk","Noto Sans SC","Avenir Next",sans-serif;background:var(--wall);color:var(--wall)}
@@ -120,7 +128,7 @@ p{font-size:15.5px;line-height:1.55}
 
 .developing{
   grid-column:1 / -1;display:grid;grid-template-columns:minmax(140px,200px) 1fr;gap:18px 28px;align-items:center;
-  padding:16px 28px;background:#241416;color:#F6F1E8;
+  padding:16px 28px;background:var(--dev-bg, #241416);color:#F6F1E8;
 }
 .developing h2{
   margin:0;font-family:"Space Grotesk","Noto Sans SC",sans-serif;font-size:13px;font-weight:500;
@@ -180,6 +188,7 @@ p{font-size:15.5px;line-height:1.55}
   <button type="button" data-theme="tide"><span class="en">Tide</span><span class="zh">潮</span></button>
   <button type="button" data-theme="ink"><span class="en">Ink</span><span class="zh">墨</span></button>
   <button type="button" data-theme="ink-gold"><span class="en">Ink gold</span><span class="zh">墨金</span></button>
+  <button type="button" data-theme="purple"><span class="en">Purple</span><span class="zh">紫</span></button>
 </div>
 <div class="house" id="house">
   <header class="tech-head">
@@ -375,7 +384,7 @@ p{font-size:15.5px;line-height:1.55}
 </div>
 <script>
 const WORKSHOPS_ENABLED = true;
-const THEMES = ["tide", "ink", "ink-gold"];
+const THEMES = ["tide", "ink", "ink-gold", "purple"];
 // Set yqs to true to show 晨昏的猫 in the In development strip.
 const DEVELOPMENTS = { care: true, yqs: false };
 document.querySelectorAll("[data-dev]").forEach(slot => {
