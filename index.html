@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <script>
 (function () {
-  var themes = { tide: 1, ink: 1 };
+  var themes = { tide: 1, ink: 1, "ink-gold": 1 };
   var theme = new URLSearchParams(location.search).get("theme");
   if (!themes[theme]) theme = "tide";
   document.documentElement.dataset.theme = theme;
@@ -27,13 +27,14 @@ html[data-theme="tide"]{
   --paper:#F8F1E8; --paper-ink:#241910; --paper-muted:#5E534A; --paper-line:#E4D3C4;
   --record:#F6F1E8; --record-muted:#D9CFC4; --record-line:#3A302C;
 }
-html[data-theme="ink"]{
+html[data-theme="ink"], html[data-theme="ink-gold"]{
   --tech-bg:#123E48; --tech-ink:#E7F7F4; --tech:#3EE0C3; --tech-muted:#B7D4D0;
   --art-bg:#6E2E2A; --art-ink:#FFF3E8; --art:#FFB15A; --art-muted:#F0D0C6;
   --wall:#140E0C; --frame:#071E24;
   --paper:#241816; --paper-ink:#F6EFE8; --paper-muted:#D9C8BE; --paper-line:#4A342E;
   --record:#F6F1E8; --record-muted:#D9CFC4; --record-line:#3A302C;
 }
+html[data-theme="ink-gold"]{ --art:#F0C84A; }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
 body{font-family:"Space Grotesk","Noto Sans SC","Avenir Next",sans-serif;background:var(--wall);color:var(--wall)}
@@ -84,28 +85,50 @@ h1,h2,h3{font-family:"Libre Baskerville","Noto Serif SC",Georgia,serif;font-weig
   content:"";position:absolute;top:50%;left:50%;width:4px;height:36px;transform:translate(-50%,-50%);
   border-left:1px solid #F6F1E8;border-right:1px solid #F6F1E8;
 }
-.tech,.art{min-height:0;overflow:auto;padding:28px 28px 36px}
+.tech,.art{min-height:0;padding:28px 28px 32px}
+.tech{
+  container-type:inline-size;
+  display:grid;grid-template-rows:auto auto auto;align-content:center;gap:4px;
+}
+.art{
+  display:grid;grid-template-columns:minmax(240px,280px) minmax(0,1fr);grid-template-rows:auto 1fr;
+  column-gap:22px;align-content:center;align-items:center;
+}
+.art .room-head{grid-column:2;grid-row:1}
+.art .media{grid-column:1;grid-row:1 / span 2;padding:0;height:100%}
+.art .room-foot{grid-column:2;grid-row:2;align-self:start}
 .tech{grid-column:1;grid-row:2;background:var(--tech-bg);color:var(--tech-ink)}
 .art{grid-column:3;grid-row:2;background:var(--art-bg);color:var(--art-ink)}
 .eyebrow{margin:0 0 8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
 .tech .eyebrow,.tech .caption{color:var(--tech)}
 .art .eyebrow,.art .caption{color:var(--art)}
-.tech h1{font-size:clamp(36px,4vw,58px)}
-.art h1{font-size:clamp(40px,4.4vw,64px)}
+.tech h1,.art h1{font-size:clamp(36px,4vw,56px)}
 h1{letter-spacing:-.03em;line-height:1.05;margin:0 0 8px}
-.sub{margin:0 0 12px;font-size:15px;line-height:1.4;max-width:46ch}
-.status{margin:0 0 14px;font-size:14px;line-height:1.45}
+.sub{margin:0 0 8px;font-size:15px;line-height:1.35;max-width:42ch}
+.status{margin:0;font-size:14px;line-height:1.45}
 .tech .status,.tech .credit{color:var(--tech-muted)}
 .art .status,.art .credit{color:var(--art-muted)}
 p{font-size:15.5px;line-height:1.55}
-.frame{background:var(--frame);aspect-ratio:16/9;margin:8px 0}
+.media{min-height:0;display:flex;align-items:flex-start;justify-content:center;padding:16px 0 8px}
+.frame{background:var(--frame);width:100%;aspect-ratio:16/9;margin:0;max-height:100%}
 .frame video{width:100%;height:100%;object-fit:cover;display:block}
-.caption{margin:0 0 16px;font-size:12px;letter-spacing:.04em}
+.poster{margin:0;height:100%;max-height:640px;display:flex;align-items:center;justify-content:center}
+.poster img{height:100%;max-height:640px;width:auto;max-width:100%;object-fit:contain;display:block}
+.caption{margin:0 0 8px;font-size:12px;letter-spacing:.04em}
 .credit{margin:8px 0 0;font-size:13px;line-height:1.5}
-.poster{float:right;width:min(240px,42%);margin:0 0 12px 18px}
-.poster img{width:100%;height:auto;display:block}
-.research{margin-top:28px;padding-top:18px;border-top:1px solid color-mix(in srgb, currentColor 22%, transparent)}
-.research h2{font-size:28px;margin:0 0 8px}
+.room-foot p{margin:0 0 8px}
+
+.developing{
+  grid-column:1 / -1;display:grid;grid-template-columns:minmax(140px,200px) 1fr;gap:18px 28px;align-items:center;
+  padding:16px 28px;background:#241416;color:#F6F1E8;
+}
+.developing h2{
+  margin:0;font-family:"Space Grotesk","Noto Sans SC",sans-serif;font-size:13px;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:#F0C84A;
+}
+.developing p{margin:0;font-size:14.5px;line-height:1.5;color:#F6F1E8}
+.developing h3{margin:0 0 4px;font-family:"Space Grotesk","Noto Sans SC",sans-serif;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#F0C84A}
+.dev-slot[hidden]{display:none !important}
 
 .record{grid-column:1 / -1;background:var(--wall);color:var(--record);padding:64px 28px 36px}
 .record h2{font-size:42px;margin:0 0 12px;letter-spacing:-.03em}
@@ -137,10 +160,12 @@ p{font-size:15.5px;line-height:1.55}
 @media (max-width:980px){
   .house{grid-template-columns:1fr !important;grid-template-rows:auto}
   .wall{display:none}
-  .tech-head,.art-head,.tech,.art,.record,.workshops,.foot{grid-column:1;grid-row:auto}
+  .tech-head,.art-head,.tech,.art,.developing,.record,.workshops,.foot{grid-column:1;grid-row:auto}
   .art-head{padding-right:22px}
-  .records,.foot{grid-template-columns:1fr}
-  .poster{float:none;width:min(280px,70%);margin:0 0 16px}
+  .records,.foot,.developing{grid-template-columns:1fr}
+  .tech,.art{display:block}
+  .poster{height:auto;max-height:62vh}
+  .poster img{height:auto;max-height:62vh;width:auto;max-width:100%}
   .lang{top:12px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -154,6 +179,7 @@ p{font-size:15.5px;line-height:1.55}
   <span class="themes-label"><span class="en">Preview</span><span class="zh">预览</span></span>
   <button type="button" data-theme="tide"><span class="en">Tide</span><span class="zh">潮</span></button>
   <button type="button" data-theme="ink"><span class="en">Ink</span><span class="zh">墨</span></button>
+  <button type="button" data-theme="ink-gold"><span class="en">Ink gold</span><span class="zh">墨金</span></button>
 </div>
 <div class="house" id="house">
   <header class="tech-head">
@@ -172,56 +198,72 @@ p{font-size:15.5px;line-height:1.55}
   </header>
 
   <section class="tech" aria-labelledby="studio-title">
-    <p class="eyebrow"><span class="en">Project</span><span class="zh">项目</span></p>
-    <h1 id="studio-title" lang="zh-Hans">即兴片场</h1>
-    <p class="sub">Improvisation Studio: An Audience-Directed Laboratory of Human–AI Co-Performance</p>
-    <p class="status">
-      <span class="en">Juried artwork, ICHEC 2026 Art Gallery, Macao</span>
-      <span class="zh">ICHEC 2026 艺术展评审入选，澳门</span>
-    </p>
-    <div class="frame">
-      <video id="studio-video" controls playsinline preload="metadata" poster="media/improvisation-studio-poster.jpg" data-label-en="Selected for the ICHEC 2026 Art Gallery" data-label-zh="入选 ICHEC 2026 艺术展">
-        <source src="media/improvisation-studio-walkthrough.mp4" type="video/mp4">
-      </video>
+    <div class="room-head">
+      <p class="eyebrow"><span class="en">Project</span><span class="zh">项目</span></p>
+      <h1 id="studio-title" lang="zh-Hans">即兴片场</h1>
+      <p class="status">
+        <span class="en">Juried artwork, ICHEC 2026 Art Gallery, Macao</span>
+        <span class="zh">ICHEC 2026 艺术展评审入选，澳门</span>
+      </p>
     </div>
-    <p class="caption"><span class="en">Selected for the ICHEC 2026 Art Gallery</span><span class="zh">入选 ICHEC 2026 艺术展</span></p>
-    <p class="en">A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
-    <p class="zh" lang="zh-Hans">一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
-    <p class="credit">
-      <span class="en">Wei Liu (performance &amp; directing design), Feibi Liu (Independent Researcher, Seattle; technical implementation).</span>
-      <span class="zh">刘韦（表演与导演设计），Feibi Liu（独立研究者，西雅图；技术实现）。</span>
-    </p>
-    <div class="research">
-      <p class="eyebrow"><span class="en">Research</span><span class="zh">研究</span></p>
-      <h2>CARE</h2>
-      <p class="status"><span class="en">Early research</span><span class="zh">早期研究</span></p>
-      <p class="en">An early research direction exploring how performance methods can inform communication, listening and response. Its starting points include “The Third Performer” and “Every Action is an Offer”.</p>
-      <p class="zh" lang="zh-Hans">一个早期研究方向，探索表演方法如何进入沟通、倾听与回应。起点包括 “The Third Performer” 与 “Every Action is an Offer”。</p>
+    <div class="media">
+      <div class="frame">
+        <video id="studio-video" controls playsinline preload="metadata" poster="media/improvisation-studio-poster.jpg" data-label-en="Selected for the ICHEC 2026 Art Gallery" data-label-zh="入选 ICHEC 2026 艺术展">
+          <source src="media/improvisation-studio-walkthrough.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+    <div class="room-foot">
+      <p class="sub">Improvisation Studio: An Audience-Directed Laboratory of Human–AI Co-Performance</p>
+      <p class="caption"><span class="en">Selected for the ICHEC 2026 Art Gallery</span><span class="zh">入选 ICHEC 2026 艺术展</span></p>
+      <p class="en">A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
+      <p class="zh" lang="zh-Hans">一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
       <p class="credit">
-        <span class="en">The longer-term research interest is embodied AI for emotional interaction with older adults. Currently at an early research stage.</span>
-        <span class="zh">更长期的研究兴趣是面向老年人情感互动的具身人工智能。目前仍处于早期研究阶段。</span>
+        <span class="en">Wei Liu (performance &amp; directing design), Feibi Liu (Independent Researcher, Seattle; technical implementation).</span>
+        <span class="zh">刘韦（表演与导演设计），Feibi Liu（独立研究者，西雅图；技术实现）。</span>
       </p>
     </div>
   </section>
 
   <section class="art" aria-labelledby="dad-title">
-    <p class="eyebrow"><span class="en">Theatre</span><span class="zh">剧场</span></p>
-    <figure class="poster">
-      <img id="dad-poster" src="media/dad-is-not-home.jpg" alt="" data-alt-en="Dad Is Not Home poster. Original credits retained." data-alt-zh="《老爸唔在家》海报。原有署名予以保留。">
-    </figure>
-    <h1 id="dad-title" lang="zh-Hans">老爸唔在家</h1>
-    <p class="sub">Dad Is Not Home</p>
-    <p class="status">
-      <span class="en">Original improvised play · 2025 · GYTF 2026 second review</span>
-      <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026 复审</span>
-    </p>
-    <p class="en">An original improvisational theatre work about absence, growing up and the passage of time. The work moves between the present, ten years later and twenty years later.</p>
-    <p class="zh" lang="zh-Hans">一部关于缺席、成长与时间流逝的原创即兴戏剧。作品在当下、十年后与二十年后之间展开。</p>
-    <p class="credit">
-      <span class="en">Conception, direction and dramaturgy: Wei Liu. Developed through creative work with the 2022 performance cohort at Macau University of Science and Technology. Original project credits are retained.</span>
-      <span class="zh">构想、导演与戏剧构作：刘韦。与澳门科技大学 2022 级表演同学共同创作发展。原项目署名予以保留。</span>
-    </p>
-    <p class="caption">Dad Is Not Home</p>
+    <div class="room-head">
+      <p class="eyebrow"><span class="en">Theatre</span><span class="zh">剧场</span></p>
+      <h1 id="dad-title" lang="zh-Hans">老爸唔在家</h1>
+      <p class="status">
+        <span class="en">Original improvised play · 2025 · GYTF 2026 second review</span>
+        <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026 复审</span>
+      </p>
+    </div>
+    <div class="media">
+      <figure class="poster">
+        <img id="dad-poster" src="media/dad-is-not-home.jpg" alt="" data-alt-en="Dad Is Not Home poster. Original credits retained." data-alt-zh="《老爸唔在家》海报。原有署名予以保留。">
+      </figure>
+    </div>
+    <div class="room-foot">
+      <p class="sub">Dad Is Not Home</p>
+      <p class="en">An original improvisational theatre work about absence, growing up and the passage of time. The work moves between the present, ten years later and twenty years later.</p>
+      <p class="zh" lang="zh-Hans">一部关于缺席、成长与时间流逝的原创即兴戏剧。作品在当下、十年后与二十年后之间展开。</p>
+      <p class="credit">
+        <span class="en">Conception, direction and dramaturgy: Wei Liu. Developed through creative work with the 2022 performance cohort at Macau University of Science and Technology. Original project credits are retained.</span>
+        <span class="zh">构想、导演与戏剧构作：刘韦。与澳门科技大学 2022 级表演同学共同创作发展。原项目署名予以保留。</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="developing" id="developing" aria-labelledby="developing-title">
+    <h2 id="developing-title"><span class="en">In development</span><span class="zh">开发中</span></h2>
+    <div class="dev-list">
+      <div class="dev-slot" data-dev="care">
+        <h3>CARE</h3>
+        <p class="en">An early research direction exploring how performance methods can inform communication, listening and response. Its starting points include “The Third Performer” and “Every Action is an Offer”.</p>
+        <p class="zh" lang="zh-Hans">一个早期研究方向，探索表演方法如何进入沟通、倾听与回应。起点包括 “The Third Performer” 与 “Every Action is an Offer”。</p>
+      </div>
+      <div class="dev-slot" data-dev="yqs" hidden>
+        <h3 lang="zh-Hans">晨昏的猫</h3>
+        <p class="en">A YQS science storytelling video exploration, developed around the rhythm of a cat’s day. Video in development.</p>
+        <p class="zh" lang="zh-Hans">晨昏的猫：围绕一只猫一天的节奏展开的 YQS 科学叙事影像探索。视频仍在开发中。</p>
+      </div>
+    </div>
   </section>
 
   <section class="record" id="record" aria-labelledby="record-title">
@@ -333,7 +375,12 @@ p{font-size:15.5px;line-height:1.55}
 </div>
 <script>
 const WORKSHOPS_ENABLED = true;
-const THEMES = ["tide", "ink"];
+const THEMES = ["tide", "ink", "ink-gold"];
+// Set yqs to true to show 晨昏的猫 in the In development strip.
+const DEVELOPMENTS = { care: true, yqs: false };
+document.querySelectorAll("[data-dev]").forEach(slot => {
+  slot.hidden = !DEVELOPMENTS[slot.dataset.dev];
+});
 const house = document.getElementById("house");
 const wall = document.getElementById("wall");
 
