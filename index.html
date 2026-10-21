@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="tide">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,36 +7,68 @@
 <meta name="description" content="In Resonance is a company for cultural technology and narrative art.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+(function () {
+  var themes = { tide: 1, ink: 1 };
+  var theme = new URLSearchParams(location.search).get("theme");
+  if (!themes[theme]) theme = "tide";
+  document.documentElement.dataset.theme = theme;
+  var lang = "en";
+  try { if (localStorage.getItem("ir-lang") === "zh") lang = "zh"; } catch (e) {}
+  document.documentElement.lang = lang;
+})();
+</script>
 <style>
-:root{
-  --tech-bg:#D5E4E8;
-  --tech-ink:#0E2F36;
-  --tech:#0A6E78;
-  --art-bg:#F3E2CF;
-  --art-ink:#3D2418;
-  --art:#8E2F24;
-  --wall:#111111;
-  --paper:#F7F4EE;
+html[data-theme="tide"]{
+  --tech-bg:#B7E4DE; --tech-ink:#062E34; --tech:#0B8F78; --tech-muted:#3A6570;
+  --art-bg:#F6C9A8; --art-ink:#3A1A12; --art:#E24B2A; --art-muted:#7A4E3E;
+  --wall:#1C1412; --frame:#08343A;
+  --paper:#F8F1E8; --paper-ink:#241910; --paper-muted:#5E534A; --paper-line:#E4D3C4;
+  --record:#F6F1E8; --record-muted:#D9CFC4; --record-line:#3A302C;
+}
+html[data-theme="ink"]{
+  --tech-bg:#123E48; --tech-ink:#E7F7F4; --tech:#3EE0C3; --tech-muted:#B7D4D0;
+  --art-bg:#6E2E2A; --art-ink:#FFF3E8; --art:#FFB15A; --art-muted:#F0D0C6;
+  --wall:#140E0C; --frame:#071E24;
+  --paper:#241816; --paper-ink:#F6EFE8; --paper-muted:#D9C8BE; --paper-line:#4A342E;
+  --record:#F6F1E8; --record-muted:#D9CFC4; --record-line:#3A302C;
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
-body{font-family:"Space Grotesk", "Avenir Next", sans-serif;background:var(--wall);color:var(--wall)}
+body{font-family:"Space Grotesk","Noto Sans SC","Avenir Next",sans-serif;background:var(--wall);color:var(--wall)}
 button,a{font:inherit}
 button{background:none;border:0;padding:0;cursor:pointer}
 a{color:inherit}
 :focus-visible{outline:2px solid currentColor;outline-offset:3px}
 body[data-workshops="off"] #workshops{display:none}
+html[lang="zh"] .en{display:none !important}
+html:not([lang="zh"]) .zh{display:none !important}
+h1,h2,h3{font-family:"Libre Baskerville","Noto Serif SC",Georgia,serif;font-weight:400}
+
+.lang{
+  position:fixed;top:18px;right:18px;z-index:6;
+  min-width:72px;min-height:36px;padding:0 12px;border-radius:999px;
+  background:var(--wall);color:#F6F1E8;font-size:13px;
+}
+.themes{
+  position:fixed;right:18px;bottom:16px;z-index:6;
+  display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;
+  background:var(--wall);color:#F6F1E8;
+}
+.themes-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#D9CFC4;padding:0 6px}
+.themes button{min-height:28px;padding:0 10px;border-radius:999px;color:#D9CFC4;font-size:12px}
+.themes button[aria-current="true"]{background:#F0C84A;color:#1A140C}
 
 .house{
   min-height:100vh;
   display:grid;
   grid-template-columns:1fr 14px 1fr;
-  grid-template-rows:auto minmax(70vh,1fr) auto auto;
+  grid-template-rows:auto minmax(70vh,1fr) auto auto auto;
 }
 .tech-head,.art-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;padding:0 22px}
-.tech-head{background:var(--tech-bg);color:var(--tech-ink)}
-.art-head{background:var(--art-bg);color:var(--art-ink)}
+.tech-head{grid-column:1;grid-row:1;background:var(--tech-bg);color:var(--tech-ink)}
+.art-head{grid-column:3;grid-row:1;background:var(--art-bg);color:var(--art-ink);padding-right:108px}
 .mark{font-weight:600;letter-spacing:-.03em;font-size:18px}
 .practice{margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
 .tools{display:flex;align-items:center;gap:16px;font-size:13px}
@@ -45,69 +77,71 @@ body[data-workshops="off"] #workshops{display:none}
 .switch i::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:currentColor;transition:transform .18s ease}
 .switch[aria-pressed="true"] i::after{transform:translateX(12px)}
 .art-head a{color:var(--art)}
-
 .wall{
   grid-row:1 / 3;grid-column:2;background:var(--wall);cursor:col-resize;position:relative;touch-action:none;
 }
 .wall::before{
   content:"";position:absolute;top:50%;left:50%;width:4px;height:36px;transform:translate(-50%,-50%);
-  border-left:1px solid #F6F1E7;border-right:1px solid #F6F1E7;
+  border-left:1px solid #F6F1E8;border-right:1px solid #F6F1E8;
 }
 .tech,.art{min-height:0;overflow:auto;padding:28px 28px 36px}
-.tech{background:var(--tech-bg);color:var(--tech-ink)}
-.art{background:var(--art-bg);color:var(--art-ink)}
+.tech{grid-column:1;grid-row:2;background:var(--tech-bg);color:var(--tech-ink)}
+.art{grid-column:3;grid-row:2;background:var(--art-bg);color:var(--art-ink)}
 .eyebrow{margin:0 0 8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
-.tech .eyebrow,.tech a{color:var(--tech)}
-.art .eyebrow{color:var(--art)}
-h1{font-family:"Libre Baskerville", Georgia, serif;font-weight:400;letter-spacing:-.03em;line-height:1.05;margin:0 0 8px}
+.tech .eyebrow,.tech .caption{color:var(--tech)}
+.art .eyebrow,.art .caption{color:var(--art)}
 .tech h1{font-size:clamp(36px,4vw,58px)}
 .art h1{font-size:clamp(40px,4.4vw,64px)}
+h1{letter-spacing:-.03em;line-height:1.05;margin:0 0 8px}
 .sub{margin:0 0 12px;font-size:15px;line-height:1.4;max-width:46ch}
 .status{margin:0 0 14px;font-size:14px;line-height:1.45}
-.tech .status{color:#3E656C}
-.art .status{color:#6E5346}
+.tech .status,.tech .credit{color:var(--tech-muted)}
+.art .status,.art .credit{color:var(--art-muted)}
 p{font-size:15.5px;line-height:1.55}
-.frame{background:#08343A;aspect-ratio:16/9;margin:8px 0 8px}
+.frame{background:var(--frame);aspect-ratio:16/9;margin:8px 0}
 .frame video{width:100%;height:100%;object-fit:cover;display:block}
 .caption{margin:0 0 16px;font-size:12px;letter-spacing:.04em}
-.tech .caption{color:#3E656C}
 .credit{margin:8px 0 0;font-size:13px;line-height:1.5}
-.tech .credit{color:#3E656C}
-.art .credit{color:#6E5346}
-.poster{float:right;width:min(240px,42%);margin:0 0 12px 18px;background:transparent}
+.poster{float:right;width:min(240px,42%);margin:0 0 12px 18px}
 .poster img{width:100%;height:auto;display:block}
+.research{margin-top:28px;padding-top:18px;border-top:1px solid color-mix(in srgb, currentColor 22%, transparent)}
+.research h2{font-size:28px;margin:0 0 8px}
 
-.research{margin-top:28px;padding-top:18px;border-top:1px solid rgba(14,47,54,.2)}
-.research h2{font-family:"Libre Baskerville", Georgia, serif;font-weight:400;font-size:28px;margin:0 0 8px}
-.yqs{
-  margin:22px 0 0;padding-top:12px;border-top:1px dashed rgba(14,47,54,.28);
-  font-size:13px;line-height:1.45;color:#3E656C;
-}
-.yqs strong{color:var(--tech-ink);font-weight:500}
+.record{grid-column:1 / -1;background:var(--wall);color:var(--record);padding:64px 28px 36px}
+.record h2{font-size:42px;margin:0 0 12px;letter-spacing:-.03em}
+.record .kicker{margin:0 0 10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#F0C84A}
+.record-note{max-width:68ch;color:var(--record-muted);margin:0 0 22px}
+.records{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:18px 32px}
+.records li{margin:0;padding-top:12px;border-top:1px solid var(--record-line)}
+.records h3{margin:0 0 6px;font-family:"Space Grotesk","Noto Sans SC",sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#F0C84A}
+.records p{margin:0 0 8px;font-size:14.5px;line-height:1.55;color:var(--record)}
+.who{color:var(--record-muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 
-.workshops{grid-column:1 / -1;background:var(--paper);color:#241910;padding:42px 28px 28px}
-.workshops h2{font-family:"Libre Baskerville", Georgia, serif;font-weight:400;font-size:36px;margin:0 0 18px}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:36px}
-.workshops h3{font-family:"Libre Baskerville", Georgia, serif;font-weight:400;font-size:20px;margin:0 0 8px}
-.workshops p,.workshops li{font-size:14.5px;line-height:1.6;color:#4A4038}
-.workshops strong{color:#241910}
+.workshops{grid-column:1 / -1;background:var(--paper);color:var(--paper-ink);padding:48px 28px 28px}
+.workshops h2{font-size:36px;margin:0 0 16px}
+.cols{max-width:68ch}
+.workshops h3{font-size:22px;margin:0 0 8px}
+.workshops p,.workshops li{font-size:14.5px;line-height:1.6;color:var(--paper-muted)}
+.workshops strong{color:var(--paper-ink)}
 .workshops a{color:var(--art)}
-.past{margin-top:16px;padding-top:12px;border-top:1px solid #E4D8CC}
+.past{margin-top:16px;padding-top:12px;border-top:1px solid var(--paper-line)}
 .more{margin-top:18px}
 .foot{
-  grid-column:1 / -1;background:var(--wall);color:#F6F1E7;
+  grid-column:1 / -1;background:var(--wall);color:#F6F1E8;
   display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;align-items:center;
-  padding:18px 28px;font-size:13px;
+  padding:22px 28px 64px;font-size:13px;
 }
-.foot p{margin:0;color:#F6F1E7}
-.foot a{color:#F6F1E7}
+.foot p{margin:0;color:#F6F1E8}
+.foot a{color:#F0C84A}
 
 @media (max-width:980px){
   .house{grid-template-columns:1fr !important;grid-template-rows:auto}
   .wall{display:none}
-  .tech-head,.art-head,.tech,.art,.workshops{grid-column:1}
-  .cols,.foot{grid-template-columns:1fr}
+  .tech-head,.art-head,.tech,.art,.record,.workshops,.foot{grid-column:1;grid-row:auto}
+  .art-head{padding-right:22px}
+  .records,.foot{grid-template-columns:1fr}
   .poster{float:none;width:min(280px,70%);margin:0 0 16px}
+  .lang{top:12px}
 }
 @media (prefers-reduced-motion:reduce){
   .switch i::after{transition:none}
@@ -115,64 +149,148 @@ p{font-size:15.5px;line-height:1.55}
 </style>
 </head>
 <body data-workshops="on">
+<button type="button" class="lang" id="lang-switch"><span class="en">中文</span><span class="zh">English</span></button>
+<div class="themes" role="group" aria-label="Preview themes">
+  <span class="themes-label"><span class="en">Preview</span><span class="zh">预览</span></span>
+  <button type="button" data-theme="tide"><span class="en">Tide</span><span class="zh">潮</span></button>
+  <button type="button" data-theme="ink"><span class="en">Ink</span><span class="zh">墨</span></button>
+</div>
 <div class="house" id="house">
   <header class="tech-head">
     <div class="mark">In Resonance</div>
-    <p class="practice">Cultural technology and narrative art</p>
+    <p class="practice"><span class="en">Cultural technology and narrative art</span><span class="zh">文化科技与叙事艺术</span></p>
   </header>
   <div class="wall" id="wall" role="separator" aria-orientation="vertical" aria-label="Drag to resize the two rooms" aria-valuemin="28" aria-valuemax="72" aria-valuenow="50" tabindex="0"></div>
   <header class="art-head">
-    <p class="practice">Narrative art</p>
+    <p class="practice"><span class="en">Narrative art</span><span class="zh">叙事艺术</span></p>
     <div class="tools">
       <button type="button" class="switch" id="workshop-switch" aria-pressed="true" aria-controls="workshops">
-        <i aria-hidden="true"></i> Workshops
+        <i aria-hidden="true"></i> <span class="en">Workshops</span><span class="zh">工作坊</span>
       </button>
-      <a href="mailto:newsblinknb@gmail.com">Contact</a>
+      <a href="mailto:newsblinknb@gmail.com"><span class="en">Contact</span><span class="zh">联系</span></a>
     </div>
   </header>
 
   <section class="tech" aria-labelledby="studio-title">
-    <p class="eyebrow">Project</p>
+    <p class="eyebrow"><span class="en">Project</span><span class="zh">项目</span></p>
     <h1 id="studio-title" lang="zh-Hans">即兴片场</h1>
     <p class="sub">Improvisation Studio: An Audience-Directed Laboratory of Human–AI Co-Performance</p>
-    <p class="status">Juried artwork, ICHEC 2026 Art Gallery, Macao · ICHEC 2026 艺术展评审入选，澳门</p>
+    <p class="status">
+      <span class="en">Juried artwork, ICHEC 2026 Art Gallery, Macao</span>
+      <span class="zh">ICHEC 2026 艺术展评审入选，澳门</span>
+    </p>
     <div class="frame">
-      <video controls playsinline preload="metadata" poster="media/improvisation-studio-poster.jpg" aria-label="Selected for the ICHEC 2026 Art Gallery">
+      <video id="studio-video" controls playsinline preload="metadata" poster="media/improvisation-studio-poster.jpg" data-label-en="Selected for the ICHEC 2026 Art Gallery" data-label-zh="入选 ICHEC 2026 艺术展">
         <source src="media/improvisation-studio-walkthrough.mp4" type="video/mp4">
       </video>
     </div>
-    <p class="caption">Selected for the ICHEC 2026 Art Gallery</p>
-    <p>A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
-    <p lang="zh-Hans">一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
-    <p class="credit">Wei Liu (performance &amp; directing design), Feibi Liu (Independent Researcher, Seattle; technical implementation).</p>
-
+    <p class="caption"><span class="en">Selected for the ICHEC 2026 Art Gallery</span><span class="zh">入选 ICHEC 2026 艺术展</span></p>
+    <p class="en">A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
+    <p class="zh" lang="zh-Hans">一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
+    <p class="credit">
+      <span class="en">Wei Liu (performance &amp; directing design), Feibi Liu (Independent Researcher, Seattle; technical implementation).</span>
+      <span class="zh">刘韦（表演与导演设计），Feibi Liu（独立研究者，西雅图；技术实现）。</span>
+    </p>
     <div class="research">
-      <p class="eyebrow">Research</p>
+      <p class="eyebrow"><span class="en">Research</span><span class="zh">研究</span></p>
       <h2>CARE</h2>
-      <p class="status">Early research</p>
-      <p>An early research direction exploring how performance methods can inform communication, listening and response. Its starting points include “The Third Performer” and “Every Action is an Offer”.</p>
-      <p class="credit">The longer-term research interest is embodied AI for emotional interaction with older adults. Currently at an early research stage.</p>
+      <p class="status"><span class="en">Early research</span><span class="zh">早期研究</span></p>
+      <p class="en">An early research direction exploring how performance methods can inform communication, listening and response. Its starting points include “The Third Performer” and “Every Action is an Offer”.</p>
+      <p class="zh" lang="zh-Hans">一个早期研究方向，探索表演方法如何进入沟通、倾听与回应。起点包括 “The Third Performer” 与 “Every Action is an Offer”。</p>
+      <p class="credit">
+        <span class="en">The longer-term research interest is embodied AI for emotional interaction with older adults. Currently at an early research stage.</span>
+        <span class="zh">更长期的研究兴趣是面向老年人情感互动的具身人工智能。目前仍处于早期研究阶段。</span>
+      </p>
     </div>
-    <p class="yqs"><strong lang="zh-Hans">晨昏的猫</strong> · Video in development. A YQS science storytelling video exploration, developed around the rhythm of a cat’s day. YQS / 有趣识 · Science storytelling. An early video-making exploration.</p>
   </section>
 
   <section class="art" aria-labelledby="dad-title">
-    <p class="eyebrow">Theatre</p>
+    <p class="eyebrow"><span class="en">Theatre</span><span class="zh">剧场</span></p>
     <figure class="poster">
-      <img src="media/dad-is-not-home.jpg" alt="Dad Is Not Home poster. Original credits retained.">
+      <img id="dad-poster" src="media/dad-is-not-home.jpg" alt="" data-alt-en="Dad Is Not Home poster. Original credits retained." data-alt-zh="《老爸唔在家》海报。原有署名予以保留。">
     </figure>
     <h1 id="dad-title" lang="zh-Hans">老爸唔在家</h1>
     <p class="sub">Dad Is Not Home</p>
-    <p class="status">Original improvised play · 2025 · GYTF 2026 second review</p>
-    <p>An original improvisational theatre work about absence, growing up and the passage of time. The work moves between the present, ten years later and twenty years later.</p>
-    <p class="credit">Conception, direction and dramaturgy: Wei Liu. Developed through creative work with the 2022 performance cohort at Macau University of Science and Technology. Original project credits are retained.</p>
+    <p class="status">
+      <span class="en">Original improvised play · 2025 · GYTF 2026 second review</span>
+      <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026 复审</span>
+    </p>
+    <p class="en">An original improvisational theatre work about absence, growing up and the passage of time. The work moves between the present, ten years later and twenty years later.</p>
+    <p class="zh" lang="zh-Hans">一部关于缺席、成长与时间流逝的原创即兴戏剧。作品在当下、十年后与二十年后之间展开。</p>
+    <p class="credit">
+      <span class="en">Conception, direction and dramaturgy: Wei Liu. Developed through creative work with the 2022 performance cohort at Macau University of Science and Technology. Original project credits are retained.</span>
+      <span class="zh">构想、导演与戏剧构作：刘韦。与澳门科技大学 2022 级表演同学共同创作发展。原项目署名予以保留。</span>
+    </p>
     <p class="caption">Dad Is Not Home</p>
   </section>
 
+  <section class="record" id="record" aria-labelledby="record-title">
+    <p class="kicker"><span class="en">Not a company results list</span><span class="zh">不是公司业绩</span></p>
+    <h2 id="record-title"><span class="en">Founder &amp; team record</span><span class="zh">创始人和团队经历</span></h2>
+    <p class="record-note en">Credits and research of the founder and collaborators. This is not a list of company results, and advertising work is not shown as clients.</p>
+    <p class="record-note zh" lang="zh-Hans">创始人与合作者的创作和研究经历。这不是公司业绩，广告作品也不作为客户列出。</p>
+    <ol class="records">
+      <li>
+        <p class="who"><span class="en">Founder &amp; Feibi Liu</span><span class="zh">创始人与 Feibi Liu</span></p>
+        <h3>ICHEC 2026 Art Gallery</h3>
+        <p class="en">Improvisation Studio was juried into the ICHEC 2026 Art Gallery (International Conference on Human-Engaged Computing), at Wynn Macau, 24–25 November 2026. Wei Liu — performance and directing design. Feibi Liu — technical implementation; Independent Researcher, Seattle.</p>
+        <p class="zh" lang="zh-Hans">「即兴片场」经评审入选 ICHEC 2026 艺术展（International Conference on Human-Engaged Computing），2026 年 11 月 24 日至 25 日，澳门永利。刘韦：表演与导演设计。Feibi Liu：技术实现；独立研究者，西雅图。</p>
+      </li>
+      <li>
+        <p class="who"><span class="en">Founder &amp; Feibi Liu</span><span class="zh">创始人与 Feibi Liu</span></p>
+        <h3>ACM Multimedia Asia 2026</h3>
+        <p class="en">Prompt as Score, by Wei Liu and Feibi Liu, was accepted as a short paper for ACM Multimedia Asia 2026 in Hanoi, 15–18 December 2026.</p>
+        <p class="zh" lang="zh-Hans">Prompt as Score（刘韦、Feibi Liu）获 ACM Multimedia Asia 2026 短文录用，河内，2026 年 12 月 15 日至 18 日。</p>
+      </li>
+      <li>
+        <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
+        <h3><span class="en">Dad Is Not Home · GYTF 2026</span><span class="zh">老爸唔在家 · GYTF 2026</span></h3>
+        <p class="en">An original improvised play in Mandarin, about 70 minutes. Selected in the first review of GYTF 2026, the first Greater Bay Area campus theatre festival, and advanced to the second review. One performance: 13 November 2025, 19:30, Macau University of Science and Technology, Dhall (venue). Wei Liu: dramaturgy, direction, and the writing of the acts “Ten years later” and “Twenty years later.”</p>
+        <p class="zh" lang="zh-Hans">普通话原创即兴戏剧，约 70 分钟。入选首届大湾区校园戏剧季（GYTF 2026）初选，进入复审。演出 1 场：2025 年 11 月 13 日 19:30，澳门科技大学 Dhall（场地）。刘韦：戏剧构作、导演，并编写「十年后」「二十年后」两幕。</p>
+      </li>
+      <li>
+        <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
+        <h3 lang="zh-Hans">「从呼吸到表达」</h3>
+        <p class="en">Wei Liu curated and led this free public workshop in Macao, 7–10 May 2026: four days, about three hours a day. Guest instructor 高詠詩. Funded by the Macao Foundation.</p>
+        <p class="zh" lang="zh-Hans">刘韦策划并带领这场免费公众工作坊，2026 年 5 月 7 日至 10 日，澳门，共 4 天，每天约 3 小时。客座导师高詠詩。澳门基金会资助。</p>
+      </li>
+      <li>
+        <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
+        <h3>TaPRA 2026</h3>
+        <p class="en">When Emotion Has No “Inside” was presented at TaPRA 2026, Queen Mary University of London, in the Performance and New Technologies working group, on 4 September 2026.</p>
+        <p class="zh" lang="zh-Hans">When Emotion Has No “Inside” 于 2026 年 9 月 4 日在伦敦玛丽女王大学 TaPRA 2026 的 Performance and New Technologies 工作组宣读。</p>
+      </li>
+      <li>
+        <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
+        <h3><span class="en">Screen</span><span class="zh">影视</span></h3>
+        <p class="en">Leading roles in more than 20 films and television dramas, and more than 100 commercials between 2006 and 2018.</p>
+        <p class="zh" lang="zh-Hans">主演影视剧超过 20 部；2006 年至 2018 年间参与广告超过 100 条。</p>
+        <p class="en">North by Northeast (director Zhang Bingjian; Wei Liu as 半拉瓜): nominated for best film in the Asian Future section of the 27th Tokyo International Film Festival, where it had its world premiere; the 51st Golden Horse Awards nominated the film for best cinematography and best original score; the 18th Shanghai International Film Festival gave it Asian New Talent nominations for best director and best actor; opening film of the 3rd Singapore Chinese Film Festival; selected for the 39th Montreal World Film Festival and the 37th Cairo International Film Festival.</p>
+        <p class="zh" lang="zh-Hans">《东北偏北》（导演张秉坚，刘韦饰半拉瓜）：第 27 届东京国际电影节「亚洲未来」最佳影片提名，并于该节世界首映；第 51 届金马奖最佳摄影、最佳原创音乐提名；第 18 届上海国际电影节亚洲新人奖最佳导演、最佳男演员提名；第三届新加坡华语电影节开幕片；入选第 39 届蒙特利尔世界电影节与第 37 届开罗国际电影节。</p>
+        <p class="en">The Enigma of Arrival (director Song Wen; Wei Liu as 三皮): world premiere in the Asian Windows section of the 23rd Busan International Film Festival (October 2018); screened at the 9th Beijing International Film Festival (2019), the 6th Silk Road International Film Festival (October 2019), and the 28th Golden Rooster and Hundred Flowers Film Festival (November 2019); theatrical release in July 2020.</p>
+        <p class="zh" lang="zh-Hans">《抵达之谜》（导演宋文，刘韦饰三皮）：第 23 届釜山国际电影节「亚洲之窗」世界首映（2018 年 10 月）；第 9 届北京国际电影节展映（2019）；第 6 届丝绸之路国际电影节（2019 年 10 月）；第 28 届金鸡百花电影节（2019 年 11 月）；2020 年 7 月院线上映。</p>
+        <p class="en">Second assistant director on Feng Xiaogang’s If You Are the One (2008), and cast assistant director on Aftershock (2009).</p>
+        <p class="zh" lang="zh-Hans">冯小刚《非诚勿扰》第二副导演（2008），《唐山大地震》演员副导演（2009）。</p>
+      </li>
+      <li>
+        <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
+        <h3><span class="en">2019 casting startup</span><span class="zh">2019 选角创业</span></h3>
+        <p class="en">He founded 北电甚蕃, a casting platform. The project won first prize in the Beijing division of the China “Internet+” competition, the only art-school winner in that division; it was also among the top 30 of the Beijing cultural and creative competition, and first in the Beijing Film Academy campus entrepreneurship contest.</p>
+        <p class="zh" lang="zh-Hans">他创立选角平台「北电甚蕃」。该项目获中国「互联网+」大赛北京赛区一等奖（该赛区唯一艺术院校），入围北京文创大赛 30 强，并获北京电影学院校园创业大赛第一名。</p>
+      </li>
+      <li>
+        <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
+        <h3><span class="en">2020 theory prize</span><span class="zh">2020 理论奖</span></h3>
+        <p class="en">Third prize in the theory category of the first international theatre “学院奖”, from the Central Academy of Drama, as the only young scholar.</p>
+        <p class="zh" lang="zh-Hans">中央戏剧学院首届国际戏剧「学院奖」理论奖三等奖，唯一青年学者。</p>
+      </li>
+    </ol>
+  </section>
+
   <section class="workshops" id="workshops" aria-labelledby="workshops-title">
-    <h2 id="workshops-title">Workshops <span lang="zh-Hans">工作坊</span></h2>
+    <h2 id="workshops-title"><span class="en">Workshops</span> <span class="zh" lang="zh-Hans">工作坊</span></h2>
     <div class="cols">
-      <div lang="en">
+      <div class="en" lang="en">
         <h3>Workshops in Improvisation &amp; Applied Theatre — in English and Mandarin</h3>
         <p>I lead bilingual (English / Mandarin) workshops that use improvisation to build listening, trust and shared storytelling, drawing on actor training (including the Meisner technique) and my research on human–AI co-performance:</p>
         <ul>
@@ -183,11 +301,11 @@ p{font-size:15.5px;line-height:1.55}
         <p>Suitable for community groups, artists and students, with or without performance experience. Contact: <a href="mailto:wliutmr@gmail.com">wliutmr@gmail.com</a></p>
         <div class="past">
           <h3>Past workshops</h3>
-          <p><strong>From Breath to Expression: Community Public Performance Workshop</strong> · 7–10 May 2026 · Macao</p>
-          <p>Curated and led by Wei Liu, with guest instructor 高詠詩. Four days, about three hours a day, free and open to the public; 21 participants aged 18–50. Breathing, Michael Chekhov technique, Alexander Technique and improvisation. Funded by the Macao Foundation; organised by the Macau University of Science and Technology Foundation, with the Academy of Film as co-organiser. Venue: PP-R215.</p>
+          <p><strong lang="zh-Hans">「从呼吸到表达」</strong> · 7–10 May 2026 · Macao</p>
+          <p>Curated and led by Wei Liu, with guest instructor 高詠詩. Four days, about three hours a day, free and open to the public. Funded by the Macao Foundation.</p>
         </div>
       </div>
-      <div lang="zh-Hans">
+      <div class="zh" lang="zh-Hans">
         <h3>即兴与应用戏剧工作坊（中文 / 英文）</h3>
         <p>我用中英双语带即兴工作坊，用即兴练倾听、信任和共同讲故事。内容来自演员训练（包括迈斯纳方法）和我对人机共同表演的研究：</p>
         <ul>
@@ -198,13 +316,14 @@ p{font-size:15.5px;line-height:1.55}
         <p>适合社区团体、艺术工作者和学生，有没有表演经验都可以。联系：<a href="mailto:wliutmr@gmail.com">wliutmr@gmail.com</a></p>
         <div class="past">
           <h3>已办场次</h3>
-          <p><strong>「从呼吸到表达」社区公众表演体验工作坊</strong> · 2026 年 5 月 7 日至 10 日 · 澳门</p>
-          <p>刘韦策划并带领，客座导师高詠詩。共 4 天，每天约 3 小时，免费向公众开放，21 人参加，年龄 18–50 岁。内容包括呼吸、契诃夫（Michael Chekhov）训练、亚历山大技巧和即兴。澳门基金会资助，澳门科技大学基金会主办，电影学院协办；地点：擎天汇 PP-R215。</p>
+          <p><strong>「从呼吸到表达」</strong> · 2026 年 5 月 7 日至 10 日 · 澳门</p>
+          <p>刘韦策划并带领，客座导师高詠詩。共 4 天，每天约 3 小时，免费向公众开放。澳门基金会资助。</p>
         </div>
       </div>
     </div>
     <p class="more"><a href="https://wei-liu.pages.dev/workshops/">wei-liu.pages.dev/workshops ↗</a></p>
   </section>
+
 
   <footer class="foot">
     <p>深圳星渐文化科技有限公司</p>
@@ -213,10 +332,41 @@ p{font-size:15.5px;line-height:1.55}
   </footer>
 </div>
 <script>
-// Set WORKSHOPS_ENABLED to false to remove the workshop section.
 const WORKSHOPS_ENABLED = true;
+const THEMES = ["tide", "ink"];
 const house = document.getElementById("house");
 const wall = document.getElementById("wall");
+
+function applyLang(lang) {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-label-en]").forEach(el => {
+    el.setAttribute("aria-label", lang === "zh" ? el.dataset.labelZh : el.dataset.labelEn);
+  });
+  document.querySelectorAll("[data-alt-en]").forEach(el => {
+    el.alt = lang === "zh" ? el.dataset.altZh : el.dataset.altEn;
+  });
+}
+applyLang(document.documentElement.lang);
+document.getElementById("lang-switch").addEventListener("click", () => {
+  const next = document.documentElement.lang === "zh" ? "en" : "zh";
+  applyLang(next);
+  try { localStorage.setItem("ir-lang", next); } catch (e) {}
+});
+
+function applyTheme(theme) {
+  if (!THEMES.includes(theme)) theme = "tide";
+  document.documentElement.dataset.theme = theme;
+  document.querySelectorAll(".themes button").forEach(button => {
+    button.setAttribute("aria-current", button.dataset.theme === theme ? "true" : "false");
+  });
+  const url = new URL(location.href);
+  url.searchParams.set("theme", theme);
+  history.replaceState(null, "", url);
+}
+applyTheme(document.documentElement.dataset.theme);
+document.querySelectorAll(".themes button").forEach(button => {
+  button.addEventListener("click", () => applyTheme(button.dataset.theme));
+});
 
 function setSplit(clientX) {
   const bounds = house.getBoundingClientRect();
@@ -235,11 +385,12 @@ wall.addEventListener("pointermove", event => {
   if (wall.hasPointerCapture(event.pointerId)) setSplit(event.clientX);
 });
 wall.addEventListener("keydown", event => {
-  const current = Number(wall.getAttribute("aria-valuenow"));
   if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
   event.preventDefault();
+  const current = Number(wall.getAttribute("aria-valuenow"));
   const delta = event.key === "ArrowLeft" ? -4 : 4;
-  setSplit(house.getBoundingClientRect().left + house.getBoundingClientRect().width * ((current + delta) / 100));
+  const bounds = house.getBoundingClientRect();
+  setSplit(bounds.left + bounds.width * ((current + delta) / 100));
 });
 wall.addEventListener("dblclick", () => {
   house.style.gridTemplateColumns = "";
