@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,560&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <script>
 (function () {
-  var themes = { green: 1, bluegrey: 1, red: 1, warmgrey: 1, "b-purple": 1 };
+  var themes = { green: 1, bluegrey: 1, red: 1, warmgrey: 1, "b-purple": 1, "b-dusk-violet": 1 };
   var theme = new URLSearchParams(location.search).get("theme");
   if (!themes[theme]) theme = "green";
   document.documentElement.dataset.theme = theme;
@@ -35,6 +35,11 @@ html[data-theme="warmgrey"]{
 html[data-theme="b-purple"]{
   --void:#3A2468; --raised:#4C3283; --ivory:#F6F3E8; --cue:#F0C84A; --muted:#D4CFDD; --line:#5E4497;
 }
+html[data-theme="b-dusk-violet"]{
+  --void:#3D2E5E; --raised:#3D2E5E; --ivory:#F6F3E8; --cue:#F0C84A; --muted:#D4CCDE; --line:#574A6E;
+}
+html[data-theme="b-dusk-violet"] #studio{background:#3B4479}
+html[data-theme="b-dusk-violet"] #dad{background:#703B5A}
 :root{ --rail:92px; --on-accent:#1A140C; }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--void);color:var(--ivory)}
@@ -162,6 +167,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
   <button type="button" data-theme="red"><span class="en">Red</span><span class="zh">红</span></button>
   <button type="button" data-theme="warmgrey"><span class="en">Warm grey</span><span class="zh">暖灰</span></button>
   <button type="button" data-theme="b-purple"><span class="en">Purple</span><span class="zh">紫</span></button>
+  <button type="button" data-theme="b-dusk-violet"><span class="en">Dusk</span><span class="zh">暮紫</span></button>
 </div>
 
 <aside class="rail">
@@ -356,7 +362,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
 
 <script>
 const WORKSHOPS_ENABLED = true;
-const THEMES = ["green", "bluegrey", "red", "warmgrey", "b-purple"];
+const THEMES = ["green", "bluegrey", "red", "warmgrey", "b-purple", "b-dusk-violet"];
 const stage = document.getElementById("stage");
 const links = [...document.querySelectorAll(".cue-link")];
 const sections = links.map(link => document.getElementById(link.dataset.cue));
