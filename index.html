@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="tide">
+<html lang="en" data-theme="purple">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +11,16 @@
 <script>
 (function () {
   var themes = { tide: 1, ink: 1, "ink-gold": 1, purple: 1, "purple-muted": 1 };
-  var theme = new URLSearchParams(location.search).get("theme");
-  if (!themes[theme]) theme = "tide";
+  var params = new URLSearchParams(location.search);
+  var theme = params.get("theme");
+  if (theme && !themes[theme]) {
+    params.delete("theme");
+    var next = location.pathname + (params.toString() ? "?" + params.toString() : "") + location.hash;
+    history.replaceState(null, "", next);
+    theme = "purple";
+  } else if (!themes[theme]) {
+    theme = "purple";
+  }
   document.documentElement.dataset.theme = theme;
   var lang = "en";
   try { if (localStorage.getItem("ir-lang") === "zh") lang = "zh"; } catch (e) {}
@@ -68,8 +76,9 @@ h1,h2,h3{font-family:"Libre Baskerville","Noto Serif SC",Georgia,serif;font-weig
   background:var(--wall);color:#F6F1E8;font-size:13px;
 }
 .themes{
+  display:none;
   position:fixed;right:18px;bottom:16px;z-index:6;
-  display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:999px;
+  align-items:center;gap:6px;padding:6px 8px;border-radius:999px;
   background:var(--wall);color:#F6F1E8;
 }
 .themes-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#D9CFC4;padding:0 6px}
@@ -355,19 +364,20 @@ document.getElementById("lang-switch").addEventListener("click", () => {
   try { localStorage.setItem("ir-lang", next); } catch (e) {}
 });
 
-function applyTheme(theme) {
-  if (!THEMES.includes(theme)) theme = "tide";
+function applyTheme(theme, writeUrl) {
+  if (!THEMES.includes(theme)) theme = "purple";
   document.documentElement.dataset.theme = theme;
   document.querySelectorAll(".themes button").forEach(button => {
     button.setAttribute("aria-current", button.dataset.theme === theme ? "true" : "false");
   });
+  if (!writeUrl) return;
   const url = new URL(location.href);
   url.searchParams.set("theme", theme);
   history.replaceState(null, "", url);
 }
-applyTheme(document.documentElement.dataset.theme);
+applyTheme(document.documentElement.dataset.theme, false);
 document.querySelectorAll(".themes button").forEach(button => {
-  button.addEventListener("click", () => applyTheme(button.dataset.theme));
+  button.addEventListener("click", () => applyTheme(button.dataset.theme, true));
 });
 
 function setSplit(clientX) {
