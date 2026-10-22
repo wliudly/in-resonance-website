@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="purple">
+<html lang="en" data-theme="purple-mid">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,9 +17,9 @@
     params.delete("theme");
     var next = location.pathname + (params.toString() ? "?" + params.toString() : "") + location.hash;
     history.replaceState(null, "", next);
-    theme = "purple";
+    theme = "purple-mid";
   } else if (!themes[theme]) {
-    theme = "purple";
+    theme = "purple-mid";
   }
   document.documentElement.dataset.theme = theme;
   var lang = "en";
@@ -374,7 +374,7 @@ document.getElementById("lang-switch").addEventListener("click", () => {
 });
 
 function applyTheme(theme, writeUrl) {
-  if (!THEMES.includes(theme)) theme = "purple";
+  if (!THEMES.includes(theme)) theme = "purple-mid";
   document.documentElement.dataset.theme = theme;
   document.querySelectorAll(".themes button").forEach(button => {
     button.setAttribute("aria-current", button.dataset.theme === theme ? "true" : "false");
