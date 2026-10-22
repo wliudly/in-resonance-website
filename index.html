@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,560&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <script>
 (function () {
-  var themes = { green: 1, bluegrey: 1, red: 1, warmgrey: 1, purple: 1 };
+  var themes = { green: 1, bluegrey: 1, red: 1, warmgrey: 1, "b-purple": 1 };
   var theme = new URLSearchParams(location.search).get("theme");
   if (!themes[theme]) theme = "green";
   document.documentElement.dataset.theme = theme;
@@ -32,7 +32,7 @@ html[data-theme="red"]{
 html[data-theme="warmgrey"]{
   --void:#3C3833; --raised:#514C45; --ivory:#F8F4EE; --cue:#FF7A3C; --muted:#E4D8CC; --line:#6E655C;
 }
-html[data-theme="purple"]{
+html[data-theme="b-purple"]{
   --void:#3A2468; --raised:#4C3283; --ivory:#F6F3E8; --cue:#F0C84A; --muted:#D4CFDD; --line:#5E4497;
 }
 :root{ --rail:92px; --on-accent:#1A140C; }
@@ -161,7 +161,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
   <button type="button" data-theme="bluegrey"><span class="en">Blue-grey</span><span class="zh">蓝灰</span></button>
   <button type="button" data-theme="red"><span class="en">Red</span><span class="zh">红</span></button>
   <button type="button" data-theme="warmgrey"><span class="en">Warm grey</span><span class="zh">暖灰</span></button>
-  <button type="button" data-theme="purple"><span class="en">Purple</span><span class="zh">紫</span></button>
+  <button type="button" data-theme="b-purple"><span class="en">Purple</span><span class="zh">紫</span></button>
 </div>
 
 <aside class="rail">
@@ -356,7 +356,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
 
 <script>
 const WORKSHOPS_ENABLED = true;
-const THEMES = ["green", "bluegrey", "red", "warmgrey", "purple"];
+const THEMES = ["green", "bluegrey", "red", "warmgrey", "b-purple"];
 const stage = document.getElementById("stage");
 const links = [...document.querySelectorAll(".cue-link")];
 const sections = links.map(link => document.getElementById(link.dataset.cue));
