@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <script>
 (function () {
-  var themes = { tide: 1, ink: 1, "ink-gold": 1, purple: 1, "purple-muted": 1 };
+  var themes = { tide: 1, ink: 1, "ink-gold": 1, purple: 1, "purple-mid": 1, "purple-muted": 1 };
   var params = new URLSearchParams(location.search);
   var theme = params.get("theme");
   if (theme && !themes[theme]) {
@@ -58,6 +58,14 @@ html[data-theme="purple-muted"]{
   --paper:#332C42; --paper-ink:#F6F3E8; --paper-muted:#D4D0DA; --paper-line:#5A5464;
   --record:#F6F3E8; --record-muted:#D4D0DA; --record-line:#5A5464;
   --dev-bg:#413854;
+}
+html[data-theme="purple-mid"]{
+  --tech-bg:#3B4479; --tech-ink:#F6F3E8; --tech:#F0C84A; --tech-muted:#D0CDE2;
+  --art-bg:#703B5A; --art-ink:#FFF4EC; --art:#F0C84A; --art-muted:#EAD2DC;
+  --wall:#3D2E5E; --frame:#202542;
+  --paper:#30244A; --paper-ink:#F6F3E8; --paper-muted:#D4CCDE; --paper-line:#574A6E;
+  --record:#F6F3E8; --record-muted:#D4CCDD; --record-line:#574A6E;
+  --dev-bg:#3D2E5E;
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
@@ -191,6 +199,7 @@ p{font-size:15.5px;line-height:1.55}
   <button type="button" data-theme="ink"><span class="en">Ink</span><span class="zh">墨</span></button>
   <button type="button" data-theme="ink-gold"><span class="en">Ink gold</span><span class="zh">墨金</span></button>
   <button type="button" data-theme="purple"><span class="en">Purple</span><span class="zh">紫</span></button>
+  <button type="button" data-theme="purple-mid"><span class="en">Mid</span><span class="zh">中紫</span></button>
   <button type="button" data-theme="purple-muted"><span class="en">Muted</span><span class="zh">烟紫</span></button>
 </div>
 <div class="house" id="house">
@@ -339,7 +348,7 @@ p{font-size:15.5px;line-height:1.55}
   </footer>
 </div>
 <script>
-const THEMES = ["tide", "ink", "ink-gold", "purple", "purple-muted"];
+const THEMES = ["tide", "ink", "ink-gold", "purple", "purple-mid", "purple-muted"];
 // Set yqs to true to show 晨昏的猫 in the In development strip.
 const DEVELOPMENTS = { care: true, yqs: false };
 document.querySelectorAll("[data-dev]").forEach(slot => {
