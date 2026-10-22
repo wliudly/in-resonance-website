@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,560&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <script>
 (function () {
-  var themes = { green: 1, bluegrey: 1, red: 1, warmgrey: 1 };
+  var themes = { green: 1, bluegrey: 1, red: 1, warmgrey: 1, purple: 1 };
   var theme = new URLSearchParams(location.search).get("theme");
   if (!themes[theme]) theme = "green";
   document.documentElement.dataset.theme = theme;
@@ -31,6 +31,9 @@ html[data-theme="red"]{
 }
 html[data-theme="warmgrey"]{
   --void:#3C3833; --raised:#514C45; --ivory:#F8F4EE; --cue:#FF7A3C; --muted:#E4D8CC; --line:#6E655C;
+}
+html[data-theme="purple"]{
+  --void:#3A2468; --raised:#4C3283; --ivory:#F6F3E8; --cue:#F0C84A; --muted:#D4CFDD; --line:#5E4497;
 }
 :root{ --rail:92px; --on-accent:#1A140C; }
 *{box-sizing:border-box}
@@ -158,6 +161,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
   <button type="button" data-theme="bluegrey"><span class="en">Blue-grey</span><span class="zh">蓝灰</span></button>
   <button type="button" data-theme="red"><span class="en">Red</span><span class="zh">红</span></button>
   <button type="button" data-theme="warmgrey"><span class="en">Warm grey</span><span class="zh">暖灰</span></button>
+  <button type="button" data-theme="purple"><span class="en">Purple</span><span class="zh">紫</span></button>
 </div>
 
 <aside class="rail">
@@ -180,7 +184,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
   <section class="cue" id="studio" aria-labelledby="studio-title">
     <div>
       <p class="kicker">01 · <span class="en">Cultural technology</span><span class="zh">文化科技</span></p>
-      <h1 id="studio-title" lang="zh-Hans">即兴片场</h1>
+      <h1 id="studio-title"><span class="en">Improvisation Studio</span><span class="zh" lang="zh-Hans">即兴片场</span></h1>
       <p class="entitle">Improvisation Studio: An Audience-Directed Laboratory of Human–AI Co-Performance</p>
       <p class="status">
         <span class="en">Juried artwork, ICHEC 2026 Art Gallery, Macao</span>
@@ -212,8 +216,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
     </div>
     <div>
       <p class="kicker">02 · <span class="en">Narrative art</span><span class="zh">叙事艺术</span></p>
-      <h1 id="dad-title" lang="zh-Hans">老爸唔在家</h1>
-      <p class="entitle">Dad Is Not Home</p>
+      <h1 id="dad-title"><span class="en">Dad Is Not Home</span><span class="zh" lang="zh-Hans">老爸唔在家</span></h1>
       <p class="status">
         <span class="en">Original improvised play · 2025 · GYTF 2026 passed the first round, advanced to the second review</span>
         <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026 初审通过，进入复审</span>
@@ -270,8 +273,8 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
       </li>
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
-        <h3 lang="zh-Hans">「从呼吸到表达」</h3>
-        <p class="en">Wei Liu curated and led this free public workshop in Macao, 7–10 May 2026: four days, about three hours a day. Guest instructor 高詠詩. Funded by the Macao Foundation.</p>
+        <h3><span class="en">Public workshop · May 2026</span><span class="zh" lang="zh-Hans">「从呼吸到表达」</span></h3>
+        <p class="en">Wei Liu curated and led this free public workshop in Macao, 7–10 May 2026: four days, about three hours a day, with a guest instructor. Funded by the Macao Foundation.</p>
         <p class="zh" lang="zh-Hans">刘韦策划并带领这场免费公众工作坊，2026 年 5 月 7 日至 10 日，澳门，共 4 天，每天约 3 小时。客座导师高詠詩。澳门基金会资助。</p>
       </li>
       <li>
@@ -285,9 +288,9 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
         <h3><span class="en">Screen</span><span class="zh">影视</span></h3>
         <p class="en">Leading roles in more than 20 films and television dramas, and more than 100 commercials between 2006 and 2018.</p>
         <p class="zh" lang="zh-Hans">主演影视剧超过 20 部；2006 年至 2018 年间参与广告超过 100 条。</p>
-        <p class="en">North by Northeast (director Zhang Bingjian; Wei Liu as 半拉瓜): nominated for best film in the Asian Future section of the 27th Tokyo International Film Festival, where it had its world premiere; the 51st Golden Horse Awards nominated the film for best cinematography and best original score; the 18th Shanghai International Film Festival gave it Asian New Talent nominations for best director and best actor; opening film of the 3rd Singapore Chinese Film Festival; selected for the 39th Montreal World Film Festival and the 37th Cairo International Film Festival.</p>
+        <p class="en">North by Northeast (director Zhang Bingjian; Wei Liu in the lead): nominated for best film in the Asian Future section of the 27th Tokyo International Film Festival, where it had its world premiere; the 51st Golden Horse Awards nominated the film for best cinematography and best original score; the 18th Shanghai International Film Festival gave it Asian New Talent nominations for best director and best actor; opening film of the 3rd Singapore Chinese Film Festival; selected for the 39th Montreal World Film Festival and the 37th Cairo International Film Festival.</p>
         <p class="zh" lang="zh-Hans">《东北偏北》（导演张秉坚，刘韦饰半拉瓜）：第 27 届东京国际电影节「亚洲未来」最佳影片提名，并于该节世界首映；第 51 届金马奖最佳摄影、最佳原创音乐提名；第 18 届上海国际电影节亚洲新人奖最佳导演、最佳男演员提名；第三届新加坡华语电影节开幕片；入选第 39 届蒙特利尔世界电影节与第 37 届开罗国际电影节。</p>
-        <p class="en">The Enigma of Arrival (director Song Wen; Wei Liu as 三皮): world premiere in the Asian Windows section of the 23rd Busan International Film Festival (October 2018); screened at the 9th Beijing International Film Festival (2019), the 6th Silk Road International Film Festival (October 2019), and the 28th Golden Rooster and Hundred Flowers Film Festival (November 2019); theatrical release in July 2020.</p>
+        <p class="en">The Enigma of Arrival (director Song Wen; Wei Liu in the lead): world premiere in the Asian Windows section of the 23rd Busan International Film Festival (October 2018); screened at the 9th Beijing International Film Festival (2019), the 6th Silk Road International Film Festival (October 2019), and the 28th Golden Rooster and Hundred Flowers Film Festival (November 2019); theatrical release in July 2020.</p>
         <p class="zh" lang="zh-Hans">《抵达之谜》（导演宋文，刘韦饰三皮）：第 23 届釜山国际电影节「亚洲之窗」世界首映（2018 年 10 月）；第 9 届北京国际电影节展映（2019）；第 6 届丝绸之路国际电影节（2019 年 10 月）；第 28 届金鸡百花电影节（2019 年 11 月）；2020 年 7 月院线上映。</p>
         <p class="en">Second assistant director on Feng Xiaogang’s If You Are the One (2008), and cast assistant director on Aftershock (2009).</p>
         <p class="zh" lang="zh-Hans">冯小刚《非诚勿扰》第二副导演（2008），《唐山大地震》演员副导演（2009）。</p>
@@ -295,13 +298,13 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
         <h3><span class="en">2019 casting startup</span><span class="zh">2019 选角创业</span></h3>
-        <p class="en">He founded 北电甚蕃, a casting platform. The project won first prize in the Beijing division of the China “Internet+” competition, the only art-school winner in that division; it was also among the top 30 of the Beijing cultural and creative competition, and first in the Beijing Film Academy campus entrepreneurship contest.</p>
+        <p class="en">He founded BFA Shenfan, a casting platform. The project won first prize in the Beijing division of the China “Internet+” competition, the only art-school winner in that division; it was also among the top 30 of the Beijing cultural and creative competition, and first in the Beijing Film Academy campus entrepreneurship contest.</p>
         <p class="zh" lang="zh-Hans">他创立选角平台「北电甚蕃」。该项目获中国「互联网+」大赛北京赛区一等奖（该赛区唯一艺术院校），入围北京文创大赛 30 强，并获北京电影学院校园创业大赛第一名。</p>
       </li>
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
         <h3><span class="en">2020 theory prize</span><span class="zh">2020 理论奖</span></h3>
-        <p class="en">Third prize in the theory category of the first international theatre “学院奖”, from the Central Academy of Drama, as the only young scholar.</p>
+        <p class="en">Third prize in the theory category of the first International Drama “Academy Award”, from the Central Academy of Drama, as the only young scholar.</p>
         <p class="zh" lang="zh-Hans">中央戏剧学院首届国际戏剧「学院奖」理论奖三等奖，唯一青年学者。</p>
       </li>
     </ol>
@@ -321,8 +324,8 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
         <p>Suitable for community groups, artists and students, with or without performance experience. Contact: <a href="mailto:wliutmr@gmail.com">wliutmr@gmail.com</a></p>
         <div class="past">
           <h3>Past workshops</h3>
-          <p><strong lang="zh-Hans">「从呼吸到表达」</strong> · 7–10 May 2026 · Macao</p>
-          <p>Curated and led by Wei Liu, with guest instructor 高詠詩. Four days, about three hours a day, free and open to the public. Funded by the Macao Foundation.</p>
+          <p><strong>Public workshop</strong> · 7–10 May 2026 · Macao</p>
+          <p>Curated and led by Wei Liu, with a guest instructor. Four days, about three hours a day, free and open to the public. Funded by the Macao Foundation.</p>
         </div>
       </div>
       <div class="zh" lang="zh-Hans">
@@ -353,7 +356,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
 
 <script>
 const WORKSHOPS_ENABLED = true;
-const THEMES = ["green", "bluegrey", "red", "warmgrey"];
+const THEMES = ["green", "bluegrey", "red", "warmgrey", "purple"];
 const stage = document.getElementById("stage");
 const links = [...document.querySelectorAll(".cue-link")];
 const sections = links.map(link => document.getElementById(link.dataset.cue));
