@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 <script>
 (function () {
-  var themes = { tide: 1, ink: 1, "ink-gold": 1, purple: 1 };
+  var themes = { tide: 1, ink: 1, "ink-gold": 1, purple: 1, "purple-muted": 1 };
   var theme = new URLSearchParams(location.search).get("theme");
   if (!themes[theme]) theme = "tide";
   document.documentElement.dataset.theme = theme;
@@ -43,6 +43,14 @@ html[data-theme="purple"]{
   --record:#F6F3E8; --record-muted:#D4C8E0; --record-line:#534078;
   --dev-bg:#3A2468;
 }
+html[data-theme="purple-muted"]{
+  --tech-bg:#484D6C; --tech-ink:#F6F3E8; --tech:#DCC9A4; --tech-muted:#D5D3DE;
+  --art-bg:#654558; --art-ink:#FFF4EC; --art:#DCC9A4; --art-muted:#E4D5DC;
+  --wall:#413854; --frame:#272A3B;
+  --paper:#332C42; --paper-ink:#F6F3E8; --paper-muted:#D4D0DA; --paper-line:#5A5464;
+  --record:#F6F3E8; --record-muted:#D4D0DA; --record-line:#5A5464;
+  --dev-bg:#413854;
+}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
 body{font-family:"Space Grotesk","Noto Sans SC","Avenir Next",sans-serif;background:var(--wall);color:var(--wall)}
@@ -50,7 +58,6 @@ button,a{font:inherit}
 button{background:none;border:0;padding:0;cursor:pointer}
 a{color:inherit}
 :focus-visible{outline:2px solid currentColor;outline-offset:3px}
-body[data-workshops="off"] #workshops{display:none}
 html[lang="zh"] .en{display:none !important}
 html:not([lang="zh"]) .zh{display:none !important}
 h1,h2,h3{font-family:"Libre Baskerville","Noto Serif SC",Georgia,serif;font-weight:400}
@@ -81,10 +88,6 @@ h1,h2,h3{font-family:"Libre Baskerville","Noto Serif SC",Georgia,serif;font-weig
 .mark{font-weight:600;letter-spacing:-.03em;font-size:18px}
 .practice{margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
 .tools{display:flex;align-items:center;gap:16px;font-size:13px}
-.switch{display:inline-flex;align-items:center;gap:8px;min-height:36px;color:var(--art)}
-.switch i{width:28px;height:16px;border:1px solid currentColor;border-radius:99px;position:relative}
-.switch i::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:currentColor;transition:transform .18s ease}
-.switch[aria-pressed="true"] i::after{transform:translateX(12px)}
 .art-head a{color:var(--art)}
 .wall{
   grid-row:1 / 3;grid-column:2;background:var(--wall);cursor:col-resize;position:relative;touch-action:none;
@@ -123,6 +126,8 @@ p{font-size:15.5px;line-height:1.55}
 .poster{margin:0;height:100%;max-height:640px;display:flex;align-items:center;justify-content:center}
 .poster img{height:100%;max-height:640px;width:auto;max-width:100%;object-fit:contain;display:block}
 .caption{margin:0 0 8px;font-size:12px;letter-spacing:.04em}
+.nosound{margin:0 0 8px;font-size:13px;letter-spacing:0;line-height:1.45}
+.tech .nosound{color:var(--tech-ink)}
 .credit{margin:8px 0 0;font-size:13px;line-height:1.5}
 .room-foot p{margin:0 0 8px}
 
@@ -148,15 +153,6 @@ p{font-size:15.5px;line-height:1.55}
 .records p{margin:0 0 8px;font-size:14.5px;line-height:1.55;color:var(--record)}
 .who{color:var(--record-muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 
-.workshops{grid-column:1 / -1;background:var(--paper);color:var(--paper-ink);padding:48px 28px 28px}
-.workshops h2{font-size:36px;margin:0 0 16px}
-.cols{max-width:68ch}
-.workshops h3{font-size:22px;margin:0 0 8px}
-.workshops p,.workshops li{font-size:14.5px;line-height:1.6;color:var(--paper-muted)}
-.workshops strong{color:var(--paper-ink)}
-.workshops a{color:var(--art)}
-.past{margin-top:16px;padding-top:12px;border-top:1px solid var(--paper-line)}
-.more{margin-top:18px}
 .foot{
   grid-column:1 / -1;background:var(--wall);color:#F6F1E8;
   display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;align-items:center;
@@ -168,7 +164,7 @@ p{font-size:15.5px;line-height:1.55}
 @media (max-width:980px){
   .house{grid-template-columns:1fr !important;grid-template-rows:auto}
   .wall{display:none}
-  .tech-head,.art-head,.tech,.art,.developing,.record,.workshops,.foot{grid-column:1;grid-row:auto}
+  .tech-head,.art-head,.tech,.art,.developing,.record,.foot{grid-column:1;grid-row:auto}
   .art-head{padding-right:22px}
   .records,.foot,.developing{grid-template-columns:1fr}
   .tech,.art{display:block}
@@ -176,12 +172,9 @@ p{font-size:15.5px;line-height:1.55}
   .poster img{height:auto;max-height:62vh;width:auto;max-width:100%}
   .lang{top:12px}
 }
-@media (prefers-reduced-motion:reduce){
-  .switch i::after{transition:none}
-}
 </style>
 </head>
-<body data-workshops="on">
+<body>
 <button type="button" class="lang" id="lang-switch"><span class="en">中文</span><span class="zh">English</span></button>
 <div class="themes" role="group" aria-label="Preview themes">
   <span class="themes-label"><span class="en">Preview</span><span class="zh">预览</span></span>
@@ -189,6 +182,7 @@ p{font-size:15.5px;line-height:1.55}
   <button type="button" data-theme="ink"><span class="en">Ink</span><span class="zh">墨</span></button>
   <button type="button" data-theme="ink-gold"><span class="en">Ink gold</span><span class="zh">墨金</span></button>
   <button type="button" data-theme="purple"><span class="en">Purple</span><span class="zh">紫</span></button>
+  <button type="button" data-theme="purple-muted"><span class="en">Muted</span><span class="zh">烟紫</span></button>
 </div>
 <div class="house" id="house">
   <header class="tech-head">
@@ -199,17 +193,14 @@ p{font-size:15.5px;line-height:1.55}
   <header class="art-head">
     <p class="practice"><span class="en">Narrative art</span><span class="zh">叙事艺术</span></p>
     <div class="tools">
-      <button type="button" class="switch" id="workshop-switch" aria-pressed="true" aria-controls="workshops">
-        <i aria-hidden="true"></i> <span class="en">Workshops</span><span class="zh">工作坊</span>
-      </button>
       <a href="mailto:newsblinknb@gmail.com"><span class="en">Contact</span><span class="zh">联系</span></a>
     </div>
   </header>
 
   <section class="tech" aria-labelledby="studio-title">
     <div class="room-head">
-      <p class="eyebrow"><span class="en">Project</span><span class="zh">项目</span></p>
-      <h1 id="studio-title" lang="zh-Hans">即兴片场</h1>
+      <p class="eyebrow"><span class="en">Work</span><span class="zh">作品</span></p>
+      <h1 id="studio-title"><span class="en">Improvisation Studio</span><span class="zh" lang="zh-Hans">即兴片场</span></h1>
       <p class="status">
         <span class="en">Juried artwork, ICHEC 2026 Art Gallery, Macao</span>
         <span class="zh">ICHEC 2026 艺术展评审入选，澳门</span>
@@ -217,16 +208,17 @@ p{font-size:15.5px;line-height:1.55}
     </div>
     <div class="media">
       <div class="frame">
-        <video id="studio-video" controls playsinline preload="metadata" poster="media/improvisation-studio-poster.jpg" data-label-en="Selected for the ICHEC 2026 Art Gallery" data-label-zh="入选 ICHEC 2026 艺术展">
+        <video id="studio-video" controls muted playsinline preload="metadata" data-label-en="Silent demo of Improvisation Studio. No sound. Selected for the ICHEC 2026 Art Gallery." data-label-zh="即兴片场无声演示。无声。入选 ICHEC 2026 艺术展。">
           <source src="media/improvisation-studio-walkthrough.mp4" type="video/mp4">
         </video>
       </div>
     </div>
     <div class="room-foot">
       <p class="sub">Improvisation Studio: An Audience-Directed Laboratory of Human–AI Co-Performance</p>
+      <p class="nosound"><span class="en">No sound. This demo has no audio track.</span><span class="zh">无声。这段演示没有音轨。</span></p>
       <p class="caption"><span class="en">Selected for the ICHEC 2026 Art Gallery</span><span class="zh">入选 ICHEC 2026 艺术展</span></p>
-      <p class="en">A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
-      <p class="zh" lang="zh-Hans">一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
+      <p class="en">A silent walkthrough of the improvisation set. A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
+      <p class="zh" lang="zh-Hans">即兴片场的无声走查。一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
       <p class="credit">
         <span class="en">Wei Liu (performance &amp; directing design), Feibi Liu (Independent Researcher, Seattle; technical implementation).</span>
         <span class="zh">刘韦（表演与导演设计），Feibi Liu（独立研究者，西雅图；技术实现）。</span>
@@ -236,11 +228,11 @@ p{font-size:15.5px;line-height:1.55}
 
   <section class="art" aria-labelledby="dad-title">
     <div class="room-head">
-      <p class="eyebrow"><span class="en">Theatre</span><span class="zh">剧场</span></p>
-      <h1 id="dad-title" lang="zh-Hans">老爸唔在家</h1>
+      <p class="eyebrow"><span class="en">Work</span><span class="zh">作品</span></p>
+      <h1 id="dad-title"><span class="en">Dad Is Not Home</span><span class="zh" lang="zh-Hans">老爸唔在家</span></h1>
       <p class="status">
-        <span class="en">Original improvised play · 2025 · GYTF 2026 passed the first round, advanced to the second review</span>
-        <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026 初审通过，进入复审</span>
+        <span class="en">Original improvised play · 2025 · GYTF 2026: first-round pass on 27 Aug 2026, advanced to second round</span>
+        <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026：8 月 27 日初审通过，进入复审</span>
       </p>
     </div>
     <div class="media">
@@ -249,7 +241,6 @@ p{font-size:15.5px;line-height:1.55}
       </figure>
     </div>
     <div class="room-foot">
-      <p class="sub">Dad Is Not Home</p>
       <p class="en">An original improvisational theatre work about absence, growing up and the passage of time. The work moves between the present, ten years later and twenty years later.</p>
       <p class="zh" lang="zh-Hans">一部关于缺席、成长与时间流逝的原创即兴戏剧。作品在当下、十年后与二十年后之间展开。</p>
       <p class="credit">
@@ -268,7 +259,7 @@ p{font-size:15.5px;line-height:1.55}
         <p class="zh" lang="zh-Hans">一个早期研究方向，探索表演方法如何进入沟通、倾听与回应。起点包括 “The Third Performer” 与 “Every Action is an Offer”。</p>
       </div>
       <div class="dev-slot" data-dev="yqs" hidden>
-        <h3 lang="zh-Hans">晨昏的猫</h3>
+        <h3><span class="en">YQS</span><span class="zh" lang="zh-Hans">晨昏的猫</span></h3>
         <p class="en">A YQS science storytelling video exploration, developed around the rhythm of a cat’s day. Video in development.</p>
         <p class="zh" lang="zh-Hans">晨昏的猫：围绕一只猫一天的节奏展开的 YQS 科学叙事影像探索。视频仍在开发中。</p>
       </div>
@@ -296,14 +287,8 @@ p{font-size:15.5px;line-height:1.55}
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
         <h3><span class="en">Dad Is Not Home · GYTF 2026</span><span class="zh">老爸唔在家 · GYTF 2026</span></h3>
-        <p class="en">An original improvised play in Mandarin, about 70 minutes. Passed the first round, advanced to the second review of GYTF 2026, the first Greater Bay Area campus theatre festival. One performance: 13 November 2025, 19:30, Macau University of Science and Technology, Dhall (venue). Wei Liu: dramaturgy, direction, and the writing of the acts “Ten years later” and “Twenty years later.”</p>
-        <p class="zh" lang="zh-Hans">普通话原创即兴戏剧，约 70 分钟。首届大湾区校园戏剧季（GYTF 2026）初审通过，进入复审。演出 1 场：2025 年 11 月 13 日 19:30，澳门科技大学 Dhall（场地）。刘韦：戏剧构作、导演，并编写「十年后」「二十年后」两幕。</p>
-      </li>
-      <li>
-        <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
-        <h3 lang="zh-Hans">「从呼吸到表达」</h3>
-        <p class="en">Wei Liu curated and led this free public workshop in Macao, 7–10 May 2026: four days, about three hours a day. Guest instructor 高詠詩. Funded by the Macao Foundation.</p>
-        <p class="zh" lang="zh-Hans">刘韦策划并带领这场免费公众工作坊，2026 年 5 月 7 日至 10 日，澳门，共 4 天，每天约 3 小时。客座导师高詠詩。澳门基金会资助。</p>
+        <p class="en">An original improvised play in Mandarin, about 70 minutes. First-round pass on 27 Aug 2026, advanced to second round of GYTF 2026, the first Greater Bay Area campus theatre festival. One performance: 13 November 2025, 19:30, Macau University of Science and Technology, Dhall (venue). Wei Liu: dramaturgy, direction, and the writing of the acts “Ten years later” and “Twenty years later.”</p>
+        <p class="zh" lang="zh-Hans">普通话原创即兴戏剧，约 70 分钟。首届大湾区校园戏剧季（GYTF 2026）8 月 27 日初审通过，进入复审。演出 1 场：2025 年 11 月 13 日 19:30，澳门科技大学 Dhall（场地）。刘韦：戏剧构作、导演，并编写「十年后」「二十年后」两幕。</p>
       </li>
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
@@ -316,9 +301,9 @@ p{font-size:15.5px;line-height:1.55}
         <h3><span class="en">Screen</span><span class="zh">影视</span></h3>
         <p class="en">Leading roles in more than 20 films and television dramas, and more than 100 commercials between 2006 and 2018.</p>
         <p class="zh" lang="zh-Hans">主演影视剧超过 20 部；2006 年至 2018 年间参与广告超过 100 条。</p>
-        <p class="en">North by Northeast (director Zhang Bingjian; Wei Liu as 半拉瓜): nominated for best film in the Asian Future section of the 27th Tokyo International Film Festival, where it had its world premiere; the 51st Golden Horse Awards nominated the film for best cinematography and best original score; the 18th Shanghai International Film Festival gave it Asian New Talent nominations for best director and best actor; opening film of the 3rd Singapore Chinese Film Festival; selected for the 39th Montreal World Film Festival and the 37th Cairo International Film Festival.</p>
+        <p class="en">North by Northeast (director Zhang Bingjian; Wei Liu in the lead): nominated for best film in the Asian Future section of the 27th Tokyo International Film Festival, where it had its world premiere; the 51st Golden Horse Awards nominated the film for best cinematography and best original score; the 18th Shanghai International Film Festival gave it Asian New Talent nominations for best director and best actor; opening film of the 3rd Singapore Chinese Film Festival; selected for the 39th Montreal World Film Festival and the 37th Cairo International Film Festival.</p>
         <p class="zh" lang="zh-Hans">《东北偏北》（导演张秉坚，刘韦饰半拉瓜）：第 27 届东京国际电影节「亚洲未来」最佳影片提名，并于该节世界首映；第 51 届金马奖最佳摄影、最佳原创音乐提名；第 18 届上海国际电影节亚洲新人奖最佳导演、最佳男演员提名；第三届新加坡华语电影节开幕片；入选第 39 届蒙特利尔世界电影节与第 37 届开罗国际电影节。</p>
-        <p class="en">The Enigma of Arrival (director Song Wen; Wei Liu as 三皮): world premiere in the Asian Windows section of the 23rd Busan International Film Festival (October 2018); screened at the 9th Beijing International Film Festival (2019), the 6th Silk Road International Film Festival (October 2019), and the 28th Golden Rooster and Hundred Flowers Film Festival (November 2019); theatrical release in July 2020.</p>
+        <p class="en">The Enigma of Arrival (director Song Wen; Wei Liu in the lead): world premiere in the Asian Windows section of the 23rd Busan International Film Festival (October 2018); screened at the 9th Beijing International Film Festival (2019), the 6th Silk Road International Film Festival (October 2019), and the 28th Golden Rooster and Hundred Flowers Film Festival (November 2019); theatrical release in July 2020.</p>
         <p class="zh" lang="zh-Hans">《抵达之谜》（导演宋文，刘韦饰三皮）：第 23 届釜山国际电影节「亚洲之窗」世界首映（2018 年 10 月）；第 9 届北京国际电影节展映（2019）；第 6 届丝绸之路国际电影节（2019 年 10 月）；第 28 届金鸡百花电影节（2019 年 11 月）；2020 年 7 月院线上映。</p>
         <p class="en">Second assistant director on Feng Xiaogang’s If You Are the One (2008), and cast assistant director on Aftershock (2009).</p>
         <p class="zh" lang="zh-Hans">冯小刚《非诚勿扰》第二副导演（2008），《唐山大地震》演员副导演（2009）。</p>
@@ -326,55 +311,17 @@ p{font-size:15.5px;line-height:1.55}
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
         <h3><span class="en">2019 casting startup</span><span class="zh">2019 选角创业</span></h3>
-        <p class="en">He founded 北电甚蕃, a casting platform. The project won first prize in the Beijing division of the China “Internet+” competition, the only art-school winner in that division; it was also among the top 30 of the Beijing cultural and creative competition, and first in the Beijing Film Academy campus entrepreneurship contest.</p>
+        <p class="en">He founded BFA Shenfan, a casting platform. The project won first prize in the Beijing division of the China “Internet+” competition, the only art-school winner in that division; it was also among the top 30 of the Beijing cultural and creative competition, and first in the Beijing Film Academy campus entrepreneurship contest.</p>
         <p class="zh" lang="zh-Hans">他创立选角平台「北电甚蕃」。该项目获中国「互联网+」大赛北京赛区一等奖（该赛区唯一艺术院校），入围北京文创大赛 30 强，并获北京电影学院校园创业大赛第一名。</p>
       </li>
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
         <h3><span class="en">2020 theory prize</span><span class="zh">2020 理论奖</span></h3>
-        <p class="en">Third prize in the theory category of the first international theatre “学院奖”, from the Central Academy of Drama, as the only young scholar.</p>
+        <p class="en">Third prize in the theory category of the first International Drama “Academy Award”, from the Central Academy of Drama, as the only young scholar.</p>
         <p class="zh" lang="zh-Hans">中央戏剧学院首届国际戏剧「学院奖」理论奖三等奖，唯一青年学者。</p>
       </li>
     </ol>
   </section>
-
-  <section class="workshops" id="workshops" aria-labelledby="workshops-title">
-    <h2 id="workshops-title"><span class="en">Workshops</span> <span class="zh" lang="zh-Hans">工作坊</span></h2>
-    <div class="cols">
-      <div class="en" lang="en">
-        <h3>Workshops in Improvisation &amp; Applied Theatre — in English and Mandarin</h3>
-        <p>I lead bilingual (English / Mandarin) workshops that use improvisation to build listening, trust and shared storytelling, drawing on actor training (including the Meisner technique) and my research on human–AI co-performance:</p>
-        <ul>
-          <li><strong>“Yes, and.”</strong> Accept an offer, add something specific, build the scene together.</li>
-          <li><strong>Attention.</strong> Listen to a partner, notice a change, respond to what is actually happening.</li>
-          <li><strong>Reflection.</strong> Step out of the exercise to talk about how choices shape relationships.</li>
-        </ul>
-        <p>Suitable for community groups, artists and students, with or without performance experience. Contact: <a href="mailto:wliutmr@gmail.com">wliutmr@gmail.com</a></p>
-        <div class="past">
-          <h3>Past workshops</h3>
-          <p><strong lang="zh-Hans">「从呼吸到表达」</strong> · 7–10 May 2026 · Macao</p>
-          <p>Curated and led by Wei Liu, with guest instructor 高詠詩. Four days, about three hours a day, free and open to the public. Funded by the Macao Foundation.</p>
-        </div>
-      </div>
-      <div class="zh" lang="zh-Hans">
-        <h3>即兴与应用戏剧工作坊（中文 / 英文）</h3>
-        <p>我用中英双语带即兴工作坊，用即兴练倾听、信任和共同讲故事。内容来自演员训练（包括迈斯纳方法）和我对人机共同表演的研究：</p>
-        <ul>
-          <li><strong>「是的，而且」</strong>：接住对方给的提议，加一点具体的东西，一起把场景搭起来。</li>
-          <li><strong>注意力</strong>：听对方，察觉变化，回应真正发生的事。</li>
-          <li><strong>反思</strong>：从练习里跳出来，讨论选择怎样塑造关系。</li>
-        </ul>
-        <p>适合社区团体、艺术工作者和学生，有没有表演经验都可以。联系：<a href="mailto:wliutmr@gmail.com">wliutmr@gmail.com</a></p>
-        <div class="past">
-          <h3>已办场次</h3>
-          <p><strong>「从呼吸到表达」</strong> · 2026 年 5 月 7 日至 10 日 · 澳门</p>
-          <p>刘韦策划并带领，客座导师高詠詩。共 4 天，每天约 3 小时，免费向公众开放。澳门基金会资助。</p>
-        </div>
-      </div>
-    </div>
-    <p class="more"><a href="https://wei-liu.pages.dev/workshops/">wei-liu.pages.dev/workshops ↗</a></p>
-  </section>
-
 
   <footer class="foot">
     <p>深圳星渐文化科技有限公司</p>
@@ -383,8 +330,7 @@ p{font-size:15.5px;line-height:1.55}
   </footer>
 </div>
 <script>
-const WORKSHOPS_ENABLED = true;
-const THEMES = ["tide", "ink", "ink-gold", "purple"];
+const THEMES = ["tide", "ink", "ink-gold", "purple", "purple-muted"];
 // Set yqs to true to show 晨昏的猫 in the In development strip.
 const DEVELOPMENTS = { care: true, yqs: false };
 document.querySelectorAll("[data-dev]").forEach(slot => {
@@ -453,19 +399,8 @@ wall.addEventListener("dblclick", () => {
   wall.setAttribute("aria-valuenow", "50");
 });
 
-const switchBtn = document.getElementById("workshop-switch");
-const workshops = document.getElementById("workshops");
-function setWorkshops(on) {
-  document.body.dataset.workshops = on ? "on" : "off";
-  switchBtn.setAttribute("aria-pressed", String(on));
-  workshops.hidden = !on;
-}
-if (!WORKSHOPS_ENABLED) {
-  switchBtn.hidden = true;
-  setWorkshops(false);
-} else {
-  switchBtn.addEventListener("click", () => setWorkshops(switchBtn.getAttribute("aria-pressed") !== "true"));
-}
+const studioVideo = document.getElementById("studio-video");
+if (studioVideo) studioVideo.muted = true;
 </script>
 </body>
 </html>
