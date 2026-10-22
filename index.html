@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="green">
+<html lang="en" data-theme="b-dusk-violet">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +11,16 @@
 <script>
 (function () {
   var themes = { green: 1, bluegrey: 1, red: 1, warmgrey: 1, "b-purple": 1, "b-dusk-violet": 1 };
-  var theme = new URLSearchParams(location.search).get("theme");
-  if (!themes[theme]) theme = "green";
+  var params = new URLSearchParams(location.search);
+  var theme = params.get("theme");
+  if (theme && !themes[theme]) {
+    params.delete("theme");
+    var next = location.pathname + (params.toString() ? "?" + params.toString() : "") + location.hash;
+    history.replaceState(null, "", next);
+    theme = "b-dusk-violet";
+  } else if (!themes[theme]) {
+    theme = "b-dusk-violet";
+  }
   document.documentElement.dataset.theme = theme;
   var lang = "en";
   try { if (localStorage.getItem("ir-lang") === "zh") lang = "zh"; } catch (e) {}
@@ -48,7 +56,6 @@ button,a{font:inherit;color:inherit}
 button{background:none;border:0;padding:0;cursor:pointer}
 a{text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--cue);outline-offset:3px}
-body[data-workshops="off"] #workshops{display:none}
 html[lang="zh"] .en{display:none !important}
 html:not([lang="zh"]) .zh{display:none !important}
 
@@ -59,8 +66,9 @@ html:not([lang="zh"]) .zh{display:none !important}
   font-size:13px;letter-spacing:.06em;
 }
 .themes{
+  display:none;
   position:fixed;right:18px;bottom:16px;z-index:5;
-  display:flex;align-items:center;gap:6px;padding:6px 8px;
+  align-items:center;gap:6px;padding:6px 8px;
   border:1px solid var(--line);border-radius:999px;background:var(--raised);
 }
 .themes-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 6px}
@@ -89,9 +97,8 @@ html:not([lang="zh"]) .zh{display:none !important}
   font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--cue);
 }
 .rail-tools{display:flex;flex-direction:column;align-items:center;gap:16px}
-.switch{color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
-.switch[aria-pressed="true"]{color:var(--cue)}
 .mail{color:var(--cue);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;writing-mode:vertical-rl;transform:rotate(180deg)}
+.site{color:var(--cue);font-size:11px;letter-spacing:.04em;text-transform:none;text-decoration:none;writing-mode:vertical-rl;transform:rotate(180deg)}
 
 .stage{margin-left:var(--rail);height:100vh;overflow:auto;scroll-snap-type:y proximity;scroll-behavior:smooth}
 .cue{
@@ -114,11 +121,12 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
 .frame video{object-fit:cover}
 .frame img{object-fit:contain;max-height:72vh;width:auto;margin:0 auto;background:transparent}
 .poster-frame{background:transparent;aspect-ratio:auto}
+.nosound{margin:10px 0 0;font-size:13px;line-height:1.45;color:var(--ivory)}
 .caption{margin:10px 0 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .care-mark{font-size:clamp(88px,12vw,160px);line-height:.85;margin:0;color:var(--cue)}
 
-.record,.workshops{scroll-snap-align:start;padding:72px 72px 36px 56px;border-top:1px solid var(--line)}
-.record h2,.workshops h2{font-size:56px;margin:0 0 18px;letter-spacing:-.03em}
+.record{scroll-snap-align:start;padding:72px 72px 36px 56px;border-top:1px solid var(--line)}
+.record h2{font-size:56px;margin:0 0 18px;letter-spacing:-.03em}
 .record-note{max-width:62ch;color:var(--muted);margin:0 0 28px}
 .records{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:22px 36px}
 .records li{margin:0;padding-top:14px;border-top:1px solid var(--line)}
@@ -126,13 +134,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
 .records p{margin:0 0 8px;font-size:15px;line-height:1.55}
 .who{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 
-.cols{display:grid;grid-template-columns:1fr;gap:8px;max-width:68ch}
-.workshops h3{font-size:26px;margin:0 0 10px}
-.workshops p,.workshops li{color:var(--muted);font-size:15px;line-height:1.6}
-.workshops strong{color:var(--ivory);font-weight:500}
-.workshops a,.record a{color:var(--cue)}
-.past{margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}
-.more{margin-top:28px}
+.record a{color:var(--cue)}
 .foot{
   display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;align-items:center;
   padding:28px 72px 72px 56px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);
@@ -145,11 +147,11 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
 }
 @media (max-width:980px){
   .rail{position:sticky;top:0;width:100%;max-width:100%;height:auto;flex-direction:row;flex-wrap:wrap;gap:8px 12px;padding:12px 16px;border-right:0;border-bottom:1px solid var(--line)}
-  .mark,.switch,.mail,.record-link{writing-mode:horizontal-tb;transform:none}
+  .mark,.mail,.site,.record-link{writing-mode:horizontal-tb;transform:none}
   .cues,.rail-tools{flex-direction:row}
   .stage{margin-left:0;height:auto;overflow:visible;max-width:100%}
-  .cue,.cols,.records,.foot{grid-template-columns:1fr}
-  .cue,.record,.workshops,.foot{padding:32px 20px 28px}
+  .cue,.records,.foot{grid-template-columns:1fr}
+  .cue,.record,.foot{padding:32px 20px 28px}
   .cue{min-height:auto;gap:24px}
   .frame img{max-width:100%;height:auto}
   .lang{top:auto;bottom:64px}
@@ -160,7 +162,7 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
 }
 </style>
 </head>
-<body data-workshops="on">
+<body>
 <button type="button" class="lang" id="lang-switch">
   <span class="en">中文</span>
   <span class="zh">English</span>
@@ -184,10 +186,8 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
     <a class="record-link" href="#record"><span class="en">Record</span><span class="zh">经历</span></a>
   </nav>
   <div class="rail-tools">
-    <button type="button" class="switch" id="workshop-switch" aria-pressed="true" aria-controls="workshops">
-      <span class="en">Workshops</span><span class="zh">工作坊</span>
-    </button>
     <a class="mail" href="mailto:newsblinknb@gmail.com"><span class="en">Contact</span><span class="zh">联系</span></a>
+    <a class="site" href="https://wei-liu.pages.dev"><span class="en">Wei Liu personal site</span><span class="zh">刘韦个人网站</span></a>
   </div>
 </aside>
 
@@ -201,8 +201,8 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
         <span class="en">Juried artwork, ICHEC 2026 Art Gallery, Macao</span>
         <span class="zh">ICHEC 2026 艺术展评审入选，澳门</span>
       </p>
-      <p class="lede en">A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
-      <p class="lede zh" lang="zh-Hans">一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
+      <p class="lede en">A silent walkthrough of the improvisation set. A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
+      <p class="lede zh" lang="zh-Hans">即兴片场的无声走查。一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
       <p class="credit">
         <span class="en">Wei Liu (performance &amp; directing design), Feibi Liu (Independent Researcher, Seattle; technical implementation).</span>
         <span class="zh">刘韦（表演与导演设计），Feibi Liu（独立研究者，西雅图；技术实现）。</span>
@@ -210,10 +210,11 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
     </div>
     <div>
       <div class="frame">
-        <video id="studio-video" controls playsinline preload="metadata" poster="media/improvisation-studio-poster.jpg" data-label-en="Selected for the ICHEC 2026 Art Gallery" data-label-zh="入选 ICHEC 2026 艺术展">
+        <video id="studio-video" controls muted playsinline preload="metadata" data-label-en="Silent demo of Improvisation Studio. No sound. Selected for the ICHEC 2026 Art Gallery." data-label-zh="即兴片场无声演示。无声。入选 ICHEC 2026 艺术展。">
           <source src="media/improvisation-studio-walkthrough.mp4" type="video/mp4">
         </video>
       </div>
+      <p class="nosound"><span class="en">No sound. This demo has no audio track.</span><span class="zh">无声。这段演示没有音轨。</span></p>
       <p class="caption">
         <span class="en">Selected for the ICHEC 2026 Art Gallery</span>
         <span class="zh">入选 ICHEC 2026 艺术展</span>
@@ -229,8 +230,8 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
       <p class="kicker">02 · <span class="en">Narrative art</span><span class="zh">叙事艺术</span></p>
       <h1 id="dad-title"><span class="en">Dad Is Not Home</span><span class="zh" lang="zh-Hans">老爸唔在家</span></h1>
       <p class="status">
-        <span class="en">Original improvised play · 2025 · GYTF 2026 passed the first round, advanced to the second review</span>
-        <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026 初审通过，进入复审</span>
+        <span class="en">Original improvised play · 2025 · GYTF 2026: first-round pass on 27 Aug 2026, advanced to second round</span>
+        <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026：8 月 27 日初审通过，进入复审</span>
       </p>
       <p class="lede en">An original improvisational theatre work about absence, growing up and the passage of time. The work moves between the present, ten years later and twenty years later.</p>
       <p class="lede zh" lang="zh-Hans">一部关于缺席、成长与时间流逝的原创即兴戏剧。作品在当下、十年后与二十年后之间展开。</p>
@@ -279,14 +280,8 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
         <h3><span class="en">Dad Is Not Home · GYTF 2026</span><span class="zh">老爸唔在家 · GYTF 2026</span></h3>
-        <p class="en">An original improvised play in Mandarin, about 70 minutes. Passed the first round, advanced to the second review of GYTF 2026, the first Greater Bay Area campus theatre festival. One performance: 13 November 2025, 19:30, Macau University of Science and Technology, Dhall (venue). Wei Liu: dramaturgy, direction, and the writing of the acts “Ten years later” and “Twenty years later.”</p>
-        <p class="zh" lang="zh-Hans">普通话原创即兴戏剧，约 70 分钟。首届大湾区校园戏剧季（GYTF 2026）初审通过，进入复审。演出 1 场：2025 年 11 月 13 日 19:30，澳门科技大学 Dhall（场地）。刘韦：戏剧构作、导演，并编写「十年后」「二十年后」两幕。</p>
-      </li>
-      <li>
-        <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
-        <h3><span class="en">Public workshop · May 2026</span><span class="zh" lang="zh-Hans">「从呼吸到表达」</span></h3>
-        <p class="en">Wei Liu curated and led this free public workshop in Macao, 7–10 May 2026: four days, about three hours a day, with a guest instructor. Funded by the Macao Foundation.</p>
-        <p class="zh" lang="zh-Hans">刘韦策划并带领这场免费公众工作坊，2026 年 5 月 7 日至 10 日，澳门，共 4 天，每天约 3 小时。客座导师高詠詩。澳门基金会资助。</p>
+        <p class="en">An original improvised play in Mandarin, about 70 minutes. First-round pass on 27 Aug 2026, advanced to second round of GYTF 2026, the first Greater Bay Area campus theatre festival. One performance: 13 November 2025, 19:30, Macau University of Science and Technology, Dhall (venue). Wei Liu: dramaturgy, direction, and the writing of the acts “Ten years later” and “Twenty years later.”</p>
+        <p class="zh" lang="zh-Hans">普通话原创即兴戏剧，约 70 分钟。首届大湾区校园戏剧季（GYTF 2026）8 月 27 日初审通过，进入复审。演出 1 场：2025 年 11 月 13 日 19:30，澳门科技大学 Dhall（场地）。刘韦：戏剧构作、导演，并编写「十年后」「二十年后」两幕。</p>
       </li>
       <li>
         <p class="who"><span class="en">Founder</span><span class="zh">创始人</span></p>
@@ -321,43 +316,6 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
     </ol>
   </section>
 
-  <section class="workshops" id="workshops" aria-labelledby="workshops-title">
-    <h2 id="workshops-title"><span class="en">Workshops</span> <span class="zh" lang="zh-Hans">工作坊</span></h2>
-    <div class="cols">
-      <div class="en" lang="en">
-        <h3>Workshops in Improvisation &amp; Applied Theatre — in English and Mandarin</h3>
-        <p>I lead bilingual (English / Mandarin) workshops that use improvisation to build listening, trust and shared storytelling, drawing on actor training (including the Meisner technique) and my research on human–AI co-performance:</p>
-        <ul>
-          <li><strong>“Yes, and.”</strong> Accept an offer, add something specific, build the scene together.</li>
-          <li><strong>Attention.</strong> Listen to a partner, notice a change, respond to what is actually happening.</li>
-          <li><strong>Reflection.</strong> Step out of the exercise to talk about how choices shape relationships.</li>
-        </ul>
-        <p>Suitable for community groups, artists and students, with or without performance experience. Contact: <a href="mailto:wliutmr@gmail.com">wliutmr@gmail.com</a></p>
-        <div class="past">
-          <h3>Past workshops</h3>
-          <p><strong>Public workshop</strong> · 7–10 May 2026 · Macao</p>
-          <p>Curated and led by Wei Liu, with a guest instructor. Four days, about three hours a day, free and open to the public. Funded by the Macao Foundation.</p>
-        </div>
-      </div>
-      <div class="zh" lang="zh-Hans">
-        <h3>即兴与应用戏剧工作坊（中文 / 英文）</h3>
-        <p>我用中英双语带即兴工作坊，用即兴练倾听、信任和共同讲故事。内容来自演员训练（包括迈斯纳方法）和我对人机共同表演的研究：</p>
-        <ul>
-          <li><strong>「是的，而且」</strong>：接住对方给的提议，加一点具体的东西，一起把场景搭起来。</li>
-          <li><strong>注意力</strong>：听对方，察觉变化，回应真正发生的事。</li>
-          <li><strong>反思</strong>：从练习里跳出来，讨论选择怎样塑造关系。</li>
-        </ul>
-        <p>适合社区团体、艺术工作者和学生，有没有表演经验都可以。联系：<a href="mailto:wliutmr@gmail.com">wliutmr@gmail.com</a></p>
-        <div class="past">
-          <h3>已办场次</h3>
-          <p><strong>「从呼吸到表达」</strong> · 2026 年 5 月 7 日至 10 日 · 澳门</p>
-          <p>刘韦策划并带领，客座导师高詠詩。共 4 天，每天约 3 小时，免费向公众开放。澳门基金会资助。</p>
-        </div>
-      </div>
-    </div>
-    <p class="more"><a href="https://wei-liu.pages.dev/workshops/">wei-liu.pages.dev/workshops ↗</a></p>
-  </section>
-
   <footer class="foot">
     <p>深圳星渐文化科技有限公司</p>
     <p>In Resonance, Shenzhen, China</p>
@@ -366,7 +324,6 @@ h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0
 </main>
 
 <script>
-const WORKSHOPS_ENABLED = true;
 const THEMES = ["green", "bluegrey", "red", "warmgrey", "b-purple", "b-dusk-violet"];
 const stage = document.getElementById("stage");
 const links = [...document.querySelectorAll(".cue-link")];
@@ -388,19 +345,20 @@ document.getElementById("lang-switch").addEventListener("click", () => {
   try { localStorage.setItem("ir-lang", next); } catch (e) {}
 });
 
-function applyTheme(theme) {
-  if (!THEMES.includes(theme)) theme = "green";
+function applyTheme(theme, writeUrl) {
+  if (!THEMES.includes(theme)) theme = "b-dusk-violet";
   document.documentElement.dataset.theme = theme;
   document.querySelectorAll(".themes button").forEach(button => {
     button.setAttribute("aria-current", button.dataset.theme === theme ? "true" : "false");
   });
+  if (!writeUrl) return;
   const url = new URL(location.href);
   url.searchParams.set("theme", theme);
   history.replaceState(null, "", url);
 }
-applyTheme(document.documentElement.dataset.theme);
+applyTheme(document.documentElement.dataset.theme, false);
 document.querySelectorAll(".themes button").forEach(button => {
-  button.addEventListener("click", () => applyTheme(button.dataset.theme));
+  button.addEventListener("click", () => applyTheme(button.dataset.theme, true));
 });
 
 const observer = new IntersectionObserver(entries => {
@@ -423,19 +381,8 @@ document.addEventListener("keydown", event => {
   sections[next].scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 });
 
-const switchBtn = document.getElementById("workshop-switch");
-const workshops = document.getElementById("workshops");
-function setWorkshops(on) {
-  document.body.dataset.workshops = on ? "on" : "off";
-  switchBtn.setAttribute("aria-pressed", String(on));
-  workshops.hidden = !on;
-}
-if (!WORKSHOPS_ENABLED) {
-  switchBtn.hidden = true;
-  setWorkshops(false);
-} else {
-  switchBtn.addEventListener("click", () => setWorkshops(switchBtn.getAttribute("aria-pressed") !== "true"));
-}
+const studioVideo = document.getElementById("studio-video");
+if (studioVideo) studioVideo.muted = true;
 </script>
 </body>
 </html>
