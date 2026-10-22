@@ -1,25 +1,25 @@
 <!doctype html>
-<html lang="en" data-theme="purple-mid">
+<html lang="en" data-theme="b-dusk-violet">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>In Resonance — Double room</title>
+<title>In Resonance — Cue</title>
 <meta name="description" content="In Resonance is a company for cultural technology and narrative art.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,560&family=Noto+Sans+SC:wght@400;500&family=Noto+Serif+SC:wght@500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <script>
 (function () {
-  var themes = { tide: 1, ink: 1, "ink-gold": 1, purple: 1, "purple-mid": 1, "purple-muted": 1 };
+  var themes = { green: 1, bluegrey: 1, red: 1, warmgrey: 1, "b-purple": 1, "b-dusk-violet": 1 };
   var params = new URLSearchParams(location.search);
   var theme = params.get("theme");
   if (theme && !themes[theme]) {
     params.delete("theme");
     var next = location.pathname + (params.toString() ? "?" + params.toString() : "") + location.hash;
     history.replaceState(null, "", next);
-    theme = "purple-mid";
+    theme = "b-dusk-violet";
   } else if (!themes[theme]) {
-    theme = "purple-mid";
+    theme = "b-dusk-violet";
   }
   document.documentElement.dataset.theme = theme;
   var lang = "en";
@@ -28,259 +28,234 @@
 })();
 </script>
 <style>
-html[data-theme="tide"]{
-  --tech-bg:#B7E4DE; --tech-ink:#062E34; --tech:#0B8F78; --tech-muted:#3A6570;
-  --art-bg:#F6C9A8; --art-ink:#3A1A12; --art:#E24B2A; --art-muted:#7A4E3E;
-  --wall:#1C1412; --frame:#08343A;
-  --paper:#F8F1E8; --paper-ink:#241910; --paper-muted:#5E534A; --paper-line:#E4D3C4;
-  --record:#F6F1E8; --record-muted:#D9CFC4; --record-line:#3A302C;
+html[data-theme="green"]{
+  --void:#14382C; --raised:#1E4A3A; --ivory:#F6F3E8; --cue:#F0C84A; --muted:#C9D5C6; --line:#2F5C49;
 }
-html[data-theme="ink"], html[data-theme="ink-gold"]{
-  --tech-bg:#123E48; --tech-ink:#E7F7F4; --tech:#3EE0C3; --tech-muted:#B7D4D0;
-  --art-bg:#6E2E2A; --art-ink:#FFF3E8; --art:#FFB15A; --art-muted:#F0D0C6;
-  --wall:#140E0C; --frame:#071E24;
-  --paper:#241816; --paper-ink:#F6EFE8; --paper-muted:#D9C8BE; --paper-line:#4A342E;
-  --record:#F6F1E8; --record-muted:#D9CFC4; --record-line:#3A302C;
+html[data-theme="bluegrey"]{
+  --void:#1A2836; --raised:#274056; --ivory:#F3F6F8; --cue:#5EE7FF; --muted:#C3D0DB; --line:#3A5A74;
 }
-html[data-theme="ink-gold"]{ --art:#F0C84A; }
-html[data-theme="purple"]{
-  --tech-bg:#2E3A86; --tech-ink:#F6F3E8; --tech:#F0C84A; --tech-muted:#C9C6E6;
-  --art-bg:#7A305C; --art-ink:#FFF4EC; --art:#F0C84A; --art-muted:#F0D0DC;
-  --wall:#3A2468; --frame:#1A2048;
-  --paper:#2E1C52; --paper-ink:#F6F3E8; --paper-muted:#D4C8E2; --paper-line:#534078;
-  --record:#F6F3E8; --record-muted:#D4C8E0; --record-line:#534078;
-  --dev-bg:#3A2468;
+html[data-theme="red"]{
+  --void:#4A1622; --raised:#61202E; --ivory:#FBF4EE; --cue:#FFD15C; --muted:#F0D0CA; --line:#7A3344;
 }
-html[data-theme="purple-muted"]{
-  --tech-bg:#484D6C; --tech-ink:#F6F3E8; --tech:#DCC9A4; --tech-muted:#D5D3DE;
-  --art-bg:#654558; --art-ink:#FFF4EC; --art:#DCC9A4; --art-muted:#E4D5DC;
-  --wall:#413854; --frame:#272A3B;
-  --paper:#332C42; --paper-ink:#F6F3E8; --paper-muted:#D4D0DA; --paper-line:#5A5464;
-  --record:#F6F3E8; --record-muted:#D4D0DA; --record-line:#5A5464;
-  --dev-bg:#413854;
+html[data-theme="warmgrey"]{
+  --void:#3C3833; --raised:#514C45; --ivory:#F8F4EE; --cue:#FF7A3C; --muted:#E4D8CC; --line:#6E655C;
 }
-html[data-theme="purple-mid"]{
-  --tech-bg:#3B4479; --tech-ink:#F6F3E8; --tech:#F0C84A; --tech-muted:#D0CDE2;
-  --art-bg:#703B5A; --art-ink:#FFF4EC; --art:#F0C84A; --art-muted:#EAD2DC;
-  --wall:#3D2E5E; --frame:#202542;
-  --paper:#30244A; --paper-ink:#F6F3E8; --paper-muted:#D4CCDE; --paper-line:#574A6E;
-  --record:#F6F3E8; --record-muted:#D4CCDD; --record-line:#574A6E;
-  --dev-bg:#3D2E5E;
+html[data-theme="b-purple"]{
+  --void:#3A2468; --raised:#4C3283; --ivory:#F6F3E8; --cue:#F0C84A; --muted:#D4CFDD; --line:#5E4497;
 }
+html[data-theme="b-dusk-violet"]{
+  --void:#3D2E5E; --raised:#3D2E5E; --ivory:#F6F3E8; --cue:#F0C84A; --muted:#D4CCDE; --line:#574A6E;
+}
+html[data-theme="b-dusk-violet"] #studio{background:#3B4479}
+html[data-theme="b-dusk-violet"] #dad{background:#703B5A}
+:root{ --rail:92px; --on-accent:#1A140C; }
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%}
-body{font-family:"Space Grotesk","Noto Sans SC","Avenir Next",sans-serif;background:var(--wall);color:var(--wall)}
-button,a{font:inherit}
+html,body{margin:0;height:100%;background:var(--void);color:var(--ivory)}
+body{font-family:Outfit,"Noto Sans SC","Avenir Next","Segoe UI",sans-serif;font-weight:300}
+button,a{font:inherit;color:inherit}
 button{background:none;border:0;padding:0;cursor:pointer}
-a{color:inherit}
-:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+a{text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--cue);outline-offset:3px}
 html[lang="zh"] .en{display:none !important}
 html:not([lang="zh"]) .zh{display:none !important}
-h1,h2,h3{font-family:"Libre Baskerville","Noto Serif SC",Georgia,serif;font-weight:400}
 
 .lang{
-  position:fixed;top:18px;right:18px;z-index:6;
-  min-width:72px;min-height:36px;padding:0 12px;border-radius:999px;
-  background:var(--wall);color:#F6F1E8;font-size:13px;
+  position:fixed;top:16px;right:18px;z-index:5;
+  min-width:72px;min-height:36px;padding:0 12px;
+  border:1px solid var(--line);border-radius:999px;background:var(--raised);color:var(--cue);
+  font-size:13px;letter-spacing:.06em;
 }
 .themes{
   display:none;
-  position:fixed;right:18px;bottom:16px;z-index:6;
-  align-items:center;gap:6px;padding:6px 8px;border-radius:999px;
-  background:var(--wall);color:#F6F1E8;
+  position:fixed;right:18px;bottom:16px;z-index:5;
+  align-items:center;gap:6px;padding:6px 8px;
+  border:1px solid var(--line);border-radius:999px;background:var(--raised);
 }
-.themes-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#D9CFC4;padding:0 6px}
-.themes button{min-height:28px;padding:0 10px;border-radius:999px;color:#D9CFC4;font-size:12px}
-.themes button[aria-current="true"]{background:#F0C84A;color:#1A140C}
+.themes-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:0 6px}
+.themes button{
+  min-height:28px;padding:0 8px;border-radius:999px;color:var(--muted);font-size:11px;letter-spacing:.04em;
+}
+.themes button[aria-current="true"]{background:var(--cue);color:var(--on-accent)}
 
-.house{
-  min-height:100vh;
-  display:grid;
-  grid-template-columns:1fr 14px 1fr;
-  grid-template-rows:auto minmax(70vh,1fr) auto auto auto;
+.rail{
+  position:fixed;inset:0 auto 0 0;width:var(--rail);
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+  padding:22px 0;border-right:1px solid var(--line);background:var(--void);z-index:2;
 }
-.tech-head,.art-head{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px;padding:0 22px}
-.tech-head{grid-column:1;grid-row:1;background:var(--tech-bg);color:var(--tech-ink)}
-.art-head{grid-column:3;grid-row:1;background:var(--art-bg);color:var(--art-ink);padding-right:108px}
-.mark{font-weight:600;letter-spacing:-.03em;font-size:18px}
-.practice{margin:0;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
-.tools{display:flex;align-items:center;gap:16px;font-size:13px}
-.art-head a{color:var(--art)}
-.wall{
-  grid-row:1 / 3;grid-column:2;background:var(--wall);cursor:col-resize;position:relative;touch-action:none;
+.mark{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:13px;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;
 }
-.wall::before{
-  content:"";position:absolute;top:50%;left:50%;width:4px;height:36px;transform:translate(-50%,-50%);
-  border-left:1px solid #F6F1E8;border-right:1px solid #F6F1E8;
+.cues{display:flex;flex-direction:column;gap:18px;align-items:center}
+.cue-link{
+  width:36px;height:36px;display:grid;place-items:center;text-decoration:none;
+  font-size:12px;letter-spacing:.08em;color:var(--muted);border-radius:50%;
 }
-.tech,.art{min-height:0;padding:28px 28px 32px}
-.tech{
-  container-type:inline-size;
-  display:grid;grid-template-rows:auto auto auto;align-content:center;gap:4px;
+.cue-link[aria-current="true"]{background:var(--cue);color:var(--on-accent)}
+.record-link{
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--cue);
 }
-.art{
-  display:grid;grid-template-columns:minmax(240px,280px) minmax(0,1fr);grid-template-rows:auto 1fr;
-  column-gap:22px;align-content:center;align-items:center;
-}
-.art .room-head{grid-column:2;grid-row:1}
-.art .media{grid-column:1;grid-row:1 / span 2;padding:0;height:100%}
-.art .room-foot{grid-column:2;grid-row:2;align-self:start}
-.tech{grid-column:1;grid-row:2;background:var(--tech-bg);color:var(--tech-ink)}
-.art{grid-column:3;grid-row:2;background:var(--art-bg);color:var(--art-ink)}
-.eyebrow{margin:0 0 8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
-.tech .eyebrow,.tech .caption{color:var(--tech)}
-.art .eyebrow,.art .caption{color:var(--art)}
-.tech h1,.art h1{font-size:clamp(36px,4vw,56px)}
-h1{letter-spacing:-.03em;line-height:1.05;margin:0 0 8px}
-.sub{margin:0 0 8px;font-size:15px;line-height:1.35;max-width:42ch}
-.status{margin:0;font-size:14px;line-height:1.45}
-.tech .status,.tech .credit{color:var(--tech-muted)}
-.art .status,.art .credit{color:var(--art-muted)}
-p{font-size:15.5px;line-height:1.55}
-.media{min-height:0;display:flex;align-items:flex-start;justify-content:center;padding:16px 0 8px}
-.frame{background:var(--frame);width:100%;aspect-ratio:16/9;margin:0;max-height:100%}
-.frame video{width:100%;height:100%;object-fit:cover;display:block}
-.poster{margin:0;height:100%;max-height:640px;display:flex;align-items:center;justify-content:center}
-.poster img{height:100%;max-height:640px;width:auto;max-width:100%;object-fit:contain;display:block}
-.caption{margin:0 0 8px;font-size:12px;letter-spacing:.04em}
-.nosound{margin:0 0 8px;font-size:13px;letter-spacing:0;line-height:1.45}
-.tech .nosound{color:var(--tech-ink)}
-.credit{margin:8px 0 0;font-size:13px;line-height:1.5}
-.room-foot p{margin:0 0 8px}
+.rail-tools{display:flex;flex-direction:column;align-items:center;gap:16px}
+.mail{color:var(--cue);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;writing-mode:vertical-rl;transform:rotate(180deg)}
+.site{color:var(--cue);font-size:11px;letter-spacing:.04em;text-transform:none;text-decoration:none;writing-mode:vertical-rl;transform:rotate(180deg)}
 
-.developing{
-  grid-column:1 / -1;display:grid;grid-template-columns:minmax(140px,200px) 1fr;gap:18px 28px;align-items:center;
-  padding:16px 28px;background:var(--dev-bg, #241416);color:#F6F1E8;
+.stage{margin-left:var(--rail);height:100vh;overflow:auto;scroll-snap-type:y proximity;scroll-behavior:smooth}
+.cue{
+  min-height:100vh;scroll-snap-align:start;
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.8fr);
+  gap:48px;align-items:center;padding:64px 72px 48px 56px;
 }
-.developing h2{
-  margin:0;font-family:"Space Grotesk","Noto Sans SC",sans-serif;font-size:13px;font-weight:500;
-  letter-spacing:.16em;text-transform:uppercase;color:#F0C84A;
-}
-.developing p{margin:0;font-size:14.5px;line-height:1.5;color:#F6F1E8}
-.developing h3{margin:0 0 4px;font-family:"Space Grotesk","Noto Sans SC",sans-serif;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#F0C84A}
-.dev-slot[hidden]{display:none !important}
+.cue > *{min-width:0}
+#dad{grid-template-columns:minmax(0,.8fr) minmax(0,1.25fr)}
+.kicker{margin:0 0 14px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--cue)}
+h1,h2{font-family:"Bodoni Moda","Noto Serif SC","Times New Roman",serif;font-weight:400}
+h1{font-size:clamp(56px,7vw,104px);line-height:.9;letter-spacing:-.03em;margin:0 0 16px}
+.entitle{margin:0 0 18px;max-width:40ch;font-size:18px;line-height:1.35}
+.status{margin:0 0 18px;color:var(--muted);font-size:14px;line-height:1.45;max-width:46ch}
+.cue p,.record p{font-size:16px;line-height:1.5}
+.lede{margin:0 0 10px;max-width:48ch}
+.credit{margin:18px 0 0;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.5;max-width:52ch}
+.frame{background:var(--raised);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.frame video,.frame img{width:100%;height:100%;display:block}
+.frame video{object-fit:cover}
+.frame img{object-fit:contain;max-height:72vh;width:auto;margin:0 auto;background:transparent}
+.poster-frame{background:transparent;aspect-ratio:auto}
+.nosound{margin:10px 0 0;font-size:13px;line-height:1.45;color:var(--ivory)}
+.caption{margin:10px 0 0;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.care-mark{font-size:clamp(88px,12vw,160px);line-height:.85;margin:0;color:var(--cue)}
 
-.record{grid-column:1 / -1;background:var(--wall);color:var(--record);padding:64px 28px 36px}
-.record h2{font-size:42px;margin:0 0 12px;letter-spacing:-.03em}
-.record .kicker{margin:0 0 10px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#F0C84A}
-.record-note{max-width:68ch;color:var(--record-muted);margin:0 0 22px}
-.records{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:18px 32px}
-.records li{margin:0;padding-top:12px;border-top:1px solid var(--record-line)}
-.records h3{margin:0 0 6px;font-family:"Space Grotesk","Noto Sans SC",sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#F0C84A}
-.records p{margin:0 0 8px;font-size:14.5px;line-height:1.55;color:var(--record)}
-.who{color:var(--record-muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.record{scroll-snap-align:start;padding:72px 72px 36px 56px;border-top:1px solid var(--line)}
+.record h2{font-size:56px;margin:0 0 18px;letter-spacing:-.03em}
+.record-note{max-width:62ch;color:var(--muted);margin:0 0 28px}
+.records{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:22px 36px}
+.records li{margin:0;padding-top:14px;border-top:1px solid var(--line)}
+.records h3{margin:0 0 6px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--cue);font-family:Outfit,"Noto Sans SC",sans-serif;font-weight:500}
+.records p{margin:0 0 8px;font-size:15px;line-height:1.55}
+.who{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 
+.record a{color:var(--cue)}
 .foot{
-  grid-column:1 / -1;background:var(--wall);color:#F6F1E8;
   display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;align-items:center;
-  padding:22px 28px 64px;font-size:13px;
+  padding:28px 72px 72px 56px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);
 }
-.foot p{margin:0;color:#F6F1E8}
-.foot a{color:#F0C84A}
+.foot p{margin:0}
+.foot a{color:var(--cue)}
 
+@media (max-width:1200px){
+  .cue,#dad{grid-template-columns:1fr;align-items:start;gap:28px}
+}
 @media (max-width:980px){
-  .house{grid-template-columns:1fr !important;grid-template-rows:auto}
-  .wall{display:none}
-  .tech-head,.art-head,.tech,.art,.developing,.record,.foot{grid-column:1;grid-row:auto}
-  .art-head{padding-right:22px}
-  .records,.foot,.developing{grid-template-columns:1fr}
-  .tech,.art{display:block}
-  .poster{height:auto;max-height:62vh}
-  .poster img{height:auto;max-height:62vh;width:auto;max-width:100%}
-  .lang{top:12px}
+  .rail{position:sticky;top:0;width:100%;max-width:100%;height:auto;flex-direction:row;flex-wrap:wrap;gap:8px 12px;padding:12px 16px;border-right:0;border-bottom:1px solid var(--line)}
+  .mark,.mail,.site,.record-link{writing-mode:horizontal-tb;transform:none}
+  .cues,.rail-tools{flex-direction:row}
+  .stage{margin-left:0;height:auto;overflow:visible;max-width:100%}
+  .cue,.records,.foot{grid-template-columns:1fr}
+  .cue,.record,.foot{padding:32px 20px 28px}
+  .cue{min-height:auto;gap:24px}
+  .frame img{max-width:100%;height:auto}
+  .lang{top:auto;bottom:64px}
+  .themes{left:12px;right:12px;justify-content:center;flex-wrap:wrap}
+}
+@media (prefers-reduced-motion:reduce){
+  .stage{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
-<button type="button" class="lang" id="lang-switch"><span class="en">中文</span><span class="zh">English</span></button>
+<button type="button" class="lang" id="lang-switch">
+  <span class="en">中文</span>
+  <span class="zh">English</span>
+</button>
 <div class="themes" role="group" aria-label="Preview themes">
   <span class="themes-label"><span class="en">Preview</span><span class="zh">预览</span></span>
-  <button type="button" data-theme="tide"><span class="en">Tide</span><span class="zh">潮</span></button>
-  <button type="button" data-theme="ink"><span class="en">Ink</span><span class="zh">墨</span></button>
-  <button type="button" data-theme="ink-gold"><span class="en">Ink gold</span><span class="zh">墨金</span></button>
-  <button type="button" data-theme="purple"><span class="en">Purple</span><span class="zh">紫</span></button>
-  <button type="button" data-theme="purple-mid"><span class="en">Mid</span><span class="zh">中紫</span></button>
-  <button type="button" data-theme="purple-muted"><span class="en">Muted</span><span class="zh">烟紫</span></button>
+  <button type="button" data-theme="green"><span class="en">Green</span><span class="zh">绿</span></button>
+  <button type="button" data-theme="bluegrey"><span class="en">Blue-grey</span><span class="zh">蓝灰</span></button>
+  <button type="button" data-theme="red"><span class="en">Red</span><span class="zh">红</span></button>
+  <button type="button" data-theme="warmgrey"><span class="en">Warm grey</span><span class="zh">暖灰</span></button>
+  <button type="button" data-theme="b-purple"><span class="en">Purple</span><span class="zh">紫</span></button>
+  <button type="button" data-theme="b-dusk-violet"><span class="en">Dusk</span><span class="zh">暮紫</span></button>
 </div>
-<div class="house" id="house">
-  <header class="tech-head">
-    <div class="mark">In Resonance</div>
-    <p class="practice"><span class="en">Cultural technology and narrative art</span><span class="zh">文化科技与叙事艺术</span></p>
-  </header>
-  <div class="wall" id="wall" role="separator" aria-orientation="vertical" aria-label="Drag to resize the two rooms" aria-valuemin="28" aria-valuemax="72" aria-valuenow="50" tabindex="0"></div>
-  <header class="art-head">
-    <p class="practice"><span class="en">Narrative art</span><span class="zh">叙事艺术</span></p>
-    <div class="tools">
-      <a href="mailto:newsblinknb@gmail.com"><span class="en">Contact</span><span class="zh">联系</span></a>
-    </div>
-  </header>
 
-  <section class="tech" aria-labelledby="studio-title">
-    <div class="room-head">
-      <p class="eyebrow"><span class="en">Work</span><span class="zh">作品</span></p>
+<aside class="rail">
+  <a class="mark" href="#studio">In Resonance</a>
+  <nav class="cues" aria-label="Cues">
+    <a class="cue-link" href="#studio" data-cue="studio" aria-current="true">01</a>
+    <a class="cue-link" href="#dad" data-cue="dad">02</a>
+    <a class="cue-link" href="#care" data-cue="care">03</a>
+    <a class="record-link" href="#record"><span class="en">Record</span><span class="zh">经历</span></a>
+  </nav>
+  <div class="rail-tools">
+    <a class="mail" href="mailto:newsblinknb@gmail.com"><span class="en">Contact</span><span class="zh">联系</span></a>
+    <a class="site" href="https://wei-liu.pages.dev"><span class="en">Wei Liu personal site</span><span class="zh">刘韦个人网站</span></a>
+  </div>
+</aside>
+
+<main class="stage" id="stage">
+  <section class="cue" id="studio" aria-labelledby="studio-title">
+    <div>
+      <p class="kicker">01 · <span class="en">Cultural technology</span><span class="zh">文化科技</span></p>
       <h1 id="studio-title"><span class="en">Improvisation Studio</span><span class="zh" lang="zh-Hans">即兴片场</span></h1>
+      <p class="entitle">Improvisation Studio: An Audience-Directed Laboratory of Human–AI Co-Performance</p>
       <p class="status">
         <span class="en">Juried artwork, ICHEC 2026 Art Gallery, Macao</span>
         <span class="zh">ICHEC 2026 艺术展评审入选，澳门</span>
       </p>
-    </div>
-    <div class="media">
-      <div class="frame">
-        <video id="studio-video" controls muted playsinline preload="metadata" data-label-en="Silent demo of Improvisation Studio. No sound. Selected for the ICHEC 2026 Art Gallery." data-label-zh="即兴片场无声演示。无声。入选 ICHEC 2026 艺术展。">
-          <source src="media/improvisation-studio-walkthrough.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-    <div class="room-foot">
-      <p class="sub">Improvisation Studio: An Audience-Directed Laboratory of Human–AI Co-Performance</p>
-      <p class="nosound"><span class="en">No sound. This demo has no audio track.</span><span class="zh">无声。这段演示没有音轨。</span></p>
-      <p class="caption"><span class="en">Selected for the ICHEC 2026 Art Gallery</span><span class="zh">入选 ICHEC 2026 艺术展</span></p>
-      <p class="en">A silent walkthrough of the improvisation set. A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
-      <p class="zh" lang="zh-Hans">即兴片场的无声走查。一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
+      <p class="lede en">A silent walkthrough of the improvisation set. A visitor takes the place of the acting teacher for two AI performers. Every line is generated live, and a third role can only be spoken by a human.</p>
+      <p class="lede zh" lang="zh-Hans">即兴片场的无声走查。一位观众担任表演老师，指导两位 AI 演员即兴；每句台词都是现场生成的，第三个角色只能由真人来说。</p>
       <p class="credit">
         <span class="en">Wei Liu (performance &amp; directing design), Feibi Liu (Independent Researcher, Seattle; technical implementation).</span>
         <span class="zh">刘韦（表演与导演设计），Feibi Liu（独立研究者，西雅图；技术实现）。</span>
       </p>
     </div>
+    <div>
+      <div class="frame">
+        <video id="studio-video" controls muted playsinline preload="metadata" data-label-en="Silent demo of Improvisation Studio. No sound. Selected for the ICHEC 2026 Art Gallery." data-label-zh="即兴片场无声演示。无声。入选 ICHEC 2026 艺术展。">
+          <source src="media/improvisation-studio-walkthrough.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="nosound"><span class="en">No sound. This demo has no audio track.</span><span class="zh">无声。这段演示没有音轨。</span></p>
+      <p class="caption">
+        <span class="en">Selected for the ICHEC 2026 Art Gallery</span>
+        <span class="zh">入选 ICHEC 2026 艺术展</span>
+      </p>
+    </div>
   </section>
 
-  <section class="art" aria-labelledby="dad-title">
-    <div class="room-head">
-      <p class="eyebrow"><span class="en">Work</span><span class="zh">作品</span></p>
+  <section class="cue" id="dad" aria-labelledby="dad-title">
+    <div class="frame poster-frame">
+      <img id="dad-poster" src="media/dad-is-not-home.jpg" alt="" data-alt-en="Dad Is Not Home poster. Original credits retained." data-alt-zh="《老爸唔在家》海报。原有署名予以保留。">
+    </div>
+    <div>
+      <p class="kicker">02 · <span class="en">Narrative art</span><span class="zh">叙事艺术</span></p>
       <h1 id="dad-title"><span class="en">Dad Is Not Home</span><span class="zh" lang="zh-Hans">老爸唔在家</span></h1>
       <p class="status">
         <span class="en">Original improvised play · 2025 · GYTF 2026: first-round pass on 27 Aug 2026, advanced to second round</span>
         <span class="zh">原创即兴戏剧 · 2025 · GYTF 2026：8 月 27 日初审通过，进入复审</span>
       </p>
-    </div>
-    <div class="media">
-      <figure class="poster">
-        <img id="dad-poster" src="media/dad-is-not-home.jpg" alt="" data-alt-en="Dad Is Not Home poster. Original credits retained." data-alt-zh="《老爸唔在家》海报。原有署名予以保留。">
-      </figure>
-    </div>
-    <div class="room-foot">
-      <p class="en">An original improvisational theatre work about absence, growing up and the passage of time. The work moves between the present, ten years later and twenty years later.</p>
-      <p class="zh" lang="zh-Hans">一部关于缺席、成长与时间流逝的原创即兴戏剧。作品在当下、十年后与二十年后之间展开。</p>
+      <p class="lede en">An original improvisational theatre work about absence, growing up and the passage of time. The work moves between the present, ten years later and twenty years later.</p>
+      <p class="lede zh" lang="zh-Hans">一部关于缺席、成长与时间流逝的原创即兴戏剧。作品在当下、十年后与二十年后之间展开。</p>
       <p class="credit">
         <span class="en">Conception, direction and dramaturgy: Wei Liu. Developed through creative work with the 2022 performance cohort at Macau University of Science and Technology. Original project credits are retained.</span>
         <span class="zh">构想、导演与戏剧构作：刘韦。与澳门科技大学 2022 级表演同学共同创作发展。原项目署名予以保留。</span>
       </p>
+      <p class="caption">Dad Is Not Home</p>
     </div>
   </section>
 
-  <section class="developing" id="developing" aria-labelledby="developing-title">
-    <h2 id="developing-title"><span class="en">In development</span><span class="zh">开发中</span></h2>
-    <div class="dev-list">
-      <div class="dev-slot" data-dev="care">
-        <h3>CARE</h3>
-        <p class="en">An early research direction exploring how performance methods can inform communication, listening and response. Its starting points include “The Third Performer” and “Every Action is an Offer”.</p>
-        <p class="zh" lang="zh-Hans">一个早期研究方向，探索表演方法如何进入沟通、倾听与回应。起点包括 “The Third Performer” 与 “Every Action is an Offer”。</p>
-      </div>
-      <div class="dev-slot" data-dev="yqs" hidden>
-        <h3><span class="en">YQS</span><span class="zh" lang="zh-Hans">晨昏的猫</span></h3>
-        <p class="en">A YQS science storytelling video exploration, developed around the rhythm of a cat’s day. Video in development.</p>
-        <p class="zh" lang="zh-Hans">晨昏的猫：围绕一只猫一天的节奏展开的 YQS 科学叙事影像探索。视频仍在开发中。</p>
-      </div>
+  <section class="cue" id="care" aria-labelledby="care-title">
+    <div>
+      <p class="kicker">03 · <span class="en">Research</span><span class="zh">研究</span></p>
+      <h1 class="care-mark" id="care-title">CARE</h1>
+    </div>
+    <div>
+      <p class="status"><span class="en">Early research</span><span class="zh">早期研究</span></p>
+      <p class="lede en">An early research direction exploring how performance methods can inform communication, listening and response. Its starting points include “The Third Performer” and “Every Action is an Offer”.</p>
+      <p class="lede zh" lang="zh-Hans">一个早期研究方向，探索表演方法如何进入沟通、倾听与回应。起点包括 “The Third Performer” 与 “Every Action is an Offer”。</p>
+      <p class="credit">
+        <span class="en">The longer-term research interest is embodied AI for emotional interaction with older adults. Currently at an early research stage.</span>
+        <span class="zh">更长期的研究兴趣是面向老年人情感互动的具身人工智能。目前仍处于早期研究阶段。</span>
+      </p>
     </div>
   </section>
 
@@ -346,16 +321,13 @@ p{font-size:15.5px;line-height:1.55}
     <p>In Resonance, Shenzhen, China</p>
     <p><a href="mailto:newsblinknb@gmail.com">newsblinknb@gmail.com</a></p>
   </footer>
-</div>
+</main>
+
 <script>
-const THEMES = ["tide", "ink", "ink-gold", "purple", "purple-mid", "purple-muted"];
-// Set yqs to true to show 晨昏的猫 in the In development strip.
-const DEVELOPMENTS = { care: true, yqs: false };
-document.querySelectorAll("[data-dev]").forEach(slot => {
-  slot.hidden = !DEVELOPMENTS[slot.dataset.dev];
-});
-const house = document.getElementById("house");
-const wall = document.getElementById("wall");
+const THEMES = ["green", "bluegrey", "red", "warmgrey", "b-purple", "b-dusk-violet"];
+const stage = document.getElementById("stage");
+const links = [...document.querySelectorAll(".cue-link")];
+const sections = links.map(link => document.getElementById(link.dataset.cue));
 
 function applyLang(lang) {
   document.documentElement.lang = lang;
@@ -374,7 +346,7 @@ document.getElementById("lang-switch").addEventListener("click", () => {
 });
 
 function applyTheme(theme, writeUrl) {
-  if (!THEMES.includes(theme)) theme = "purple-mid";
+  if (!THEMES.includes(theme)) theme = "b-dusk-violet";
   document.documentElement.dataset.theme = theme;
   document.querySelectorAll(".themes button").forEach(button => {
     button.setAttribute("aria-current", button.dataset.theme === theme ? "true" : "false");
@@ -389,33 +361,24 @@ document.querySelectorAll(".themes button").forEach(button => {
   button.addEventListener("click", () => applyTheme(button.dataset.theme, true));
 });
 
-function setSplit(clientX) {
-  const bounds = house.getBoundingClientRect();
-  const min = bounds.width * 0.28;
-  const max = bounds.width * 0.72;
-  const x = Math.min(Math.max(clientX - bounds.left, min), max);
-  const left = ((x / bounds.width) * 100).toFixed(2);
-  house.style.gridTemplateColumns = left + "% 14px 1fr";
-  wall.setAttribute("aria-valuenow", String(Math.round(parseFloat(left))));
-}
-wall.addEventListener("pointerdown", event => {
-  wall.setPointerCapture(event.pointerId);
-  setSplit(event.clientX);
-});
-wall.addEventListener("pointermove", event => {
-  if (wall.hasPointerCapture(event.pointerId)) setSplit(event.clientX);
-});
-wall.addEventListener("keydown", event => {
-  if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    links.forEach(link => {
+      link.setAttribute("aria-current", link.dataset.cue === entry.target.id ? "true" : "false");
+    });
+  });
+}, { root: stage, threshold: 0.55 });
+sections.forEach(section => observer.observe(section));
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+  if (event.target.closest("input, textarea, video, button")) return;
+  const current = links.findIndex(link => link.getAttribute("aria-current") === "true");
+  const next = event.key === "ArrowDown" ? Math.min(current + 1, links.length - 1) : Math.max(current - 1, 0);
+  if (next === current || next < 0) return;
   event.preventDefault();
-  const current = Number(wall.getAttribute("aria-valuenow"));
-  const delta = event.key === "ArrowLeft" ? -4 : 4;
-  const bounds = house.getBoundingClientRect();
-  setSplit(bounds.left + bounds.width * ((current + delta) / 100));
-});
-wall.addEventListener("dblclick", () => {
-  house.style.gridTemplateColumns = "";
-  wall.setAttribute("aria-valuenow", "50");
+  sections[next].scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 });
 
 const studioVideo = document.getElementById("studio-video");
